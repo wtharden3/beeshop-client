@@ -5,7 +5,7 @@ const App: React.FunctionComponent = () => {
   return (
     <div className="App">
       <header className="App-header">
-        The Bee Lounge
+        The Bee Lounge -dev
       </header>
     </div>
   );
