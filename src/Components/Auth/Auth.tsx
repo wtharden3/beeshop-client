@@ -1,8 +1,8 @@
 import { Component } from 'react';
 
-// type AuthProps = {
-//   props: any;
-// };
+type AuthProps = {
+  props: string;
+};
 
 type AuthState = {
   firstName: string;
@@ -12,8 +12,8 @@ type AuthState = {
   userRole: string;
 };
 
-class Auth extends Component<{token: string}, AuthState> {
-  constructor(props: any) {
+class Auth extends Component<AuthProps, AuthState> {
+  constructor(props: AuthProps) {
     super(props);
     this.state = {
       firstName: '',
