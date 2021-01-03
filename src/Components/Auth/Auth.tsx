@@ -1,33 +1,23 @@
 import { Component } from 'react';
+import Signup from './Signup';
 
-type AuthProps = {
-  props: string;
-};
 
-type AuthState = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  userRole: string;
-};
 
-class Auth extends Component<AuthProps, AuthState> {
-  constructor(props: AuthProps) {
+class Auth extends Component<{}, {holder: string}> {
+  constructor(props: any) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      userRole: '',
+      holder: 'placeholder'
     };
   }
   render(){
     return(
 
     <div>
-      Auth
+      <h1>Auth</h1>
+      <h2>{this.state.holder}</h2>
+      <br />
+      <Signup />
     </div>
     )
   }
