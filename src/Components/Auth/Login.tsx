@@ -19,8 +19,8 @@ class Login extends Component<{}, LoginState>{
       <div>
         <h2>Login</h2>
         <form>
-          <input placeholder="email" value={this.state.email} />
-          <input placeholder="password" value={this.state.password} />
+          <input type="email" placeholder="email" value={this.state.email} onChange={(e: any) => this.setState({email: e.target.value})}/>
+          <input type="password" placeholder="password" value={this.state.password} onChange={(e: any) => this.setState({password: e.target.value})}/>
         </form>
       </div>
     )
