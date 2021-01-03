@@ -36,6 +36,7 @@ class Home extends Component<{}, Products>{
     .then(res => res.json())
     .then(data => {
       //console.log(data.products)
+      this.setState({message: data.message})
       data.products.map((occurance: any) => console.log(occurance))
     })
   }
@@ -46,6 +47,7 @@ class Home extends Component<{}, Products>{
         Home
         <h1>Home</h1>
         <h2>{this.state.products.productName}</h2>
+        <p>{this.state.message}</p>
       </div>
     )
   }
