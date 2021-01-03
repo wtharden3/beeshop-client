@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Login from './Login';
 import Signup from './Signup';
 
 
@@ -18,6 +19,8 @@ class Auth extends Component<{}, {holder: string}> {
       <h2>{this.state.holder}</h2>
       <br />
       <Signup />
+      <br />
+      <Login />
     </div>
     )
   }

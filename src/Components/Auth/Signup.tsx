@@ -25,11 +25,12 @@ class Signup extends Component<{}, SignUpState> {
       <div>
         <h1>Signup</h1>
         <form>
-          <input placeholder="first name" value={this.state.firstName} />
-          <input placeholder="last name" value={this.state.lastName} />
-          <input placeholder="email" value={this.state.email} />
-          <input placeholder="password" value={this.state.password} />
+          <input placeholder="first name" value={this.state.firstName} onChange={(e: any) => this.setState({firstName: e.target.value})}/>
+          <input placeholder="last name" value={this.state.lastName} onChange={(e: any) => this.setState({lastName: e.target.value})}/>
+          <input placeholder="email" value={this.state.email} onChange={(e: any) => this.setState({email: e.target.value})}/>
+          <input type="password" placeholder="password" value={this.state.password} onChange={(e: any) => this.setState({password: e.target.value})}/>
           <input placeholder="user role - will change" value={this.state.userRole} />
+          <button>Submit</button>
         </form>
       </div>
     );
