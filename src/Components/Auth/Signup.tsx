@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import APIURL from '../../helpers/environment';
 
 type SignUpState = {
   firstName: string;
@@ -20,16 +21,73 @@ class Signup extends Component<{}, SignUpState> {
     };
   }
 
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    //fetch and set value
+    const firstName: string = this.state.firstName;
+    const lastName: string = this.state.lastName;
+    const email: string = this.state.email;
+    const password: string = this.state.password;
+    const userRole: string = this.state.userRole;
+
+    // console.log('this.state.firstName', firstName);
+    const url: string = `${APIURL}/user/register`;
+    const bodyObj: any = {
+      firstName,
+      lastName,
+      email,
+      password,
+      userRole,
+    };
+    // console.log(url);
+    // console.log(bodyObj);
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bodyObj),
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('submit data', data)
+      console.log('data.user', data.user)
+    });
+  };
+
   render() {
     return (
       <div>
         <h1>Signup</h1>
-        <form>
-          <input placeholder="first name" value={this.state.firstName} onChange={(e: any) => this.setState({firstName: e.target.value})}/>
-          <input placeholder="last name" value={this.state.lastName} onChange={(e: any) => this.setState({lastName: e.target.value})}/>
-          <input type="email" placeholder="email" value={this.state.email} onChange={(e: any) => this.setState({email: e.target.value})}/>
-          <input type="password" placeholder="password" value={this.state.password} onChange={(e: any) => this.setState({password: e.target.value})}/>
-          <input placeholder="user role - will change" value={this.state.userRole} onChange={(e: any) => this.setState({userRole: e.target.value})}/>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            placeholder="first name"
+            value={this.state.firstName}
+            onChange={(e: any) => this.setState({ firstName: e.target.value })}
+          />
+          <input
+            placeholder="last name"
+            value={this.state.lastName}
+            onChange={(e: any) => this.setState({ lastName: e.target.value })}
+          />
+          <input
+            type="email"
+            placeholder="email"
+            value={this.state.email}
+            onChange={(e: any) => this.setState({ email: e.target.value })}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={this.state.password}
+            onChange={(e: any) => this.setState({ password: e.target.value })}
+          />
+          <input
+            placeholder="user role - will change"
+            value={this.state.userRole}
+            onChange={(e: any) => this.setState({ userRole: e.target.value })}
+          />
           <button>Submit</button>
         </form>
       </div>
