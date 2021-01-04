@@ -19,6 +19,8 @@ class Signup extends Component<{}, SignUpState> {
       password: '',
       userRole: '',
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = (e: any) => {
