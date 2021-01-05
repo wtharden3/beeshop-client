@@ -3,7 +3,7 @@ import APIURL from '../../helpers/environment';
 
 // type HomeProps = {
 //   displayProducts: () => React.ReactNode;
-// }  
+// }
 
 type Products = {
   message: string;
@@ -40,8 +40,8 @@ class Home extends Component<{}, Products> {
         <li>{product.size}</li>
         <li>{product.description}</li>
       </ul>
-    ))
-  }
+    ));
+  };
 
   componentDidMount() {
     fetch(`${APIURL}/products/inventory`, {
@@ -67,17 +67,21 @@ class Home extends Component<{}, Products> {
         <h1>Home Page!</h1>
         {/* <h2>{this.state.products.productName}</h2> */}
         <p>{this.state.message}</p>
-        <p>{this.state.productList.map(productobj => (productobj.productName))}</p>
-        <p>{this.state.productList.map(productobj => (productobj.size))}</p>
-        <div>{this.state.productList.map(product => (
-      <ul key={product.id}>
-        <li>{product.category}</li>
-        <li>{product.subCategory}</li>
-        <li>{product.productName}</li>
-        <li>{product.size}</li>
-        <li>{product.description}</li>
-      </ul>
-    ))}</div>
+        <p>
+          {this.state.productList.map(productobj => productobj.productName)}
+        </p>
+        <p>{this.state.productList.map(productobj => productobj.size)}</p>
+        <div>
+          {this.state.productList.map(product => (
+            <ul key={product.id}>
+              <li>{product.category}</li>
+              <li>{product.subCategory}</li>
+              <li>{product.productName}</li>
+              <li>{product.size}</li>
+              <li>{product.description}</li>
+            </ul>
+          ))}
+        </div>
       </div>
     );
   }
