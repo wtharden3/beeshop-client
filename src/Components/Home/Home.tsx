@@ -67,16 +67,12 @@ class Home extends Component<{}, Products> {
         <h1>Home Page!</h1>
         {/* <h2>{this.state.products.productName}</h2> */}
         <p>{this.state.message}</p>
-        <p>
-          {this.state.productList.map(productobj => productobj.productName)}
-        </p>
-        <p>{this.state.productList.map(productobj => productobj.size)}</p>
         <div>
           {this.state.productList.map(product => (
             <ul key={product.id}>
+              <li><h4>{product.productName}</h4></li>
               <li>{product.category}</li>
               <li>{product.subCategory}</li>
-              <li>{product.productName}</li>
               <li>{product.size}</li>
               <li>{product.description}</li>
             </ul>
