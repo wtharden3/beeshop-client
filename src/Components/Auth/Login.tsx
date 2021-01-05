@@ -1,9 +1,10 @@
-import { Component } from 'react';
+import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment'
 
 type LoginProps = {
   setToken: (data: string) => void;
 }  
+
 type LoginState = {
   // token: string;
   email: string;
@@ -23,7 +24,7 @@ class Login extends Component<LoginProps, LoginState> {
 
   }
 
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log('handled it', this.state.email);
 

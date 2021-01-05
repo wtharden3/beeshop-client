@@ -12,7 +12,7 @@ type AuthState = {
 }
 
 class Auth extends Component<AuthProps, AuthState> {
-  constructor(props: any) {
+  constructor(props: AuthProps) {
     super(props);
     this.state = {
       holder: 'placeholder'

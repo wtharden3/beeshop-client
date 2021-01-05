@@ -20,7 +20,7 @@ type AppState = {
 // };
 
 class App extends Component<{}, AppState> {
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props);
     this.state = {
       token: '',
