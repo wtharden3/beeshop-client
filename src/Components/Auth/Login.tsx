@@ -14,8 +14,8 @@ class Login extends Component<LoginProps, LoginState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      email: 'youremail@email.com',
-      password: '',
+      email: 'ipop@email.com',
+      password: 'pass',
       // token: '',
     };
 
