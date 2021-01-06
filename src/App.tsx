@@ -3,27 +3,23 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import Home from './Components/Home/Home';
 import Auth from './Components/Auth/Auth';
+import Orders from './Components/Order/Orders';
 
 //using alias over interfaces //https://medium.com/@koss_lebedev/type-aliases-vs-interfaces-in-typescript-based-react-apps-e77c9a1d5fd0
-
-// type AppProps = {
-//   token: string;
-// }
 
 type AppState = {
   token: string | undefined;
 };
 
-// type AppProps = {
-//   setToken: any;
-//   updateToken: any;
-// };
+type AppProps = {
+  // token: string | undefined;
+};
 
-class App extends Component<{}, AppState> {
-  constructor(props: {}) {
+class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
-      token: '',
+      token: undefined,
     };
 
     //  this.setToken = this.setToken.bind(this);
@@ -40,19 +36,11 @@ class App extends Component<{}, AppState> {
   };
 
   render() {
-    // const token: string | undefined = this.state.token;
-
-    // const setToken = (data: string) => {
-    //   this.setState({ token: data });
-    // };
-
-    // const updateToken = () => {
-    //   this.setState({ token: undefined });
-    // };
-    // const tokenProps = [token, setToken, updateToken];
+    // const tokenProps = {token: this.state.token};
 
     return (
       <div className="App">
+        <p>{this.state.token}</p>
         <Router>
           <div>
             <ul>
@@ -61,6 +49,9 @@ class App extends Component<{}, AppState> {
               </li>
               <li>
                 <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/orders">View Orders</Link>
               </li>
               <li>
                 Logout
@@ -74,6 +65,9 @@ class App extends Component<{}, AppState> {
             </Route>
             <Route exact path="/home">
               <Home />
+            </Route>
+            <Route>
+              <Orders token={this.state.token}/>
             </Route>
           </Switch>
         </Router>
