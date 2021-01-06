@@ -1,19 +1,27 @@
-import {Component} from 'react';
+import { Component } from 'react';
 
-type ProductCreateProps = {
-  
-}
+type ProductCreateProps = {};
 
 type ProductCreateState = {
-  holder: string
-}
+  productName: string;
+  description: string;
+  category: string;
+  subCategory: string;
+  sku: number;
+  size: string;
+};
 
-class ProductCreate extends Component<ProductCreateProps, ProductCreateState>{
-  constructor(props: ProductCreateProps){
+class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
+  constructor(props: ProductCreateProps) {
     super(props);
-    this.state={
-      holder: ""
-    }
+    this.state = {
+      productName: '',
+      description: '',
+      category: '',
+      subCategory: '',
+      sku: 0,
+      size: '',
+    };
   }
 }
 
