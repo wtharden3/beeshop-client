@@ -5,8 +5,8 @@ switch (window.location.hostname) {
     APIURL = 'http://localhost:4040';
     break;
 
-  case 'kws-beeshop-client.herokuapp.com':
-    APIURL = 'https://kws-beeshop.herokuapp.com';
+  case 'wth-beeshop.herokuapp.com':
+    APIURL = 'https://wth-beeshop-server.herokuapp.com';
     break;
 
   default:
