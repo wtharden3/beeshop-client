@@ -2,11 +2,11 @@ import { Component } from 'react';
 import OrderCreate from './OrderCreate';
 
 type OrdersProps = {
-  token: string | undefined;
+  token: string;
 };
 
 type OrderState = {
-  token: string | undefined;
+  token: string;
 };
 
 class Orders extends Component<OrdersProps, OrderState> {
@@ -21,7 +21,7 @@ class Orders extends Component<OrdersProps, OrderState> {
     return (
       <div>
         <p>{this.state.token}</p>
-        <OrderCreate />
+        <OrderCreate token={this.state.token}/>
       </div>
     );
   }

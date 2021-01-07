@@ -4,11 +4,12 @@ import './App.css';
 import Home from './Components/Home/Home';
 import Auth from './Components/Auth/Auth';
 import Orders from './Components/Order/Orders';
+import ProductsPortal from './Components/Product/ProductsPortal';
 
 //using alias over interfaces //https://medium.com/@koss_lebedev/type-aliases-vs-interfaces-in-typescript-based-react-apps-e77c9a1d5fd0
 
 type AppState = {
-  token: string | undefined;
+  token: string; //took out | undefined;
 };
 
 type AppProps = {
@@ -19,7 +20,7 @@ class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      token: undefined,
+      token: '',
     };
 
     //  this.setToken = this.setToken.bind(this);
@@ -27,12 +28,25 @@ class App extends Component<AppProps, AppState> {
   }
 
   setToken = (data: string) => {
-    this.setState({ token: data });
+    //step 1
+    // getItem() from storage
+    const localToken = localStorage.getItem('token');
+    // step 2
+    //check to see if there is an item
+    // if (localToken) {
+    // }
+      localStorage.setItem('token', data);
+      this.setState({ token: data });
+      console.log(localToken);
+    // step 3
+    // setItem() -- set the token or local token in the browser
+    // step 4
+    // set state
   };
 
   //this needs to go on Navbar
   clearToken = () => {
-    this.setState({ token: undefined });
+    this.setState({ token: '' });
   };
 
   render() {
@@ -41,6 +55,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
         <p>{this.state.token}</p>
+        
         <Router>
           <div>
             <ul>
@@ -54,8 +69,9 @@ class App extends Component<AppProps, AppState> {
                 <Link to="/orders">View Orders</Link>
               </li>
               <li>
-                Logout
+                <Link to="/dashboard">Dashboard</Link>
               </li>
+              <li>Logout</li>
             </ul>
           </div>
           <hr />
@@ -66,8 +82,11 @@ class App extends Component<AppProps, AppState> {
             <Route exact path="/home">
               <Home />
             </Route>
-            <Route>
-              <Orders token={this.state.token}/>
+            <Route exact path="/orders">
+              <Orders token={this.state.token} />
+            </Route>
+            <Route exact path="/dashboard">
+              <ProductsPortal token={this.state.token} />
             </Route>
           </Switch>
         </Router>

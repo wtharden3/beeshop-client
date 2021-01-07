@@ -15,7 +15,7 @@ class Login extends Component<LoginProps, LoginState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      email: 'ipop@email.com',
+      email: 'spender@email.com',
       password: 'pass',
       // token: '',
     };
@@ -36,7 +36,7 @@ class Login extends Component<LoginProps, LoginState> {
       email,
       password
     }
-
+  console.log(this.props.setToken)
     fetch(url, {
       method: 'POST',
       headers: {

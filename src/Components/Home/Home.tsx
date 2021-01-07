@@ -52,9 +52,9 @@ class Home extends Component<{}, Products> {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('data.products', data.products);
-        console.log(typeof data.products);
-        console.log('data.products', data.products[0].size);
+        // console.log('data.products', data.products);
+        // console.log(typeof data);
+        // console.log('data', data);
         this.setState({ productList: data.products });
         this.setState({ message: data.message });
       });
