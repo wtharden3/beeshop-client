@@ -12,6 +12,10 @@ type OrderCreateState = {
   details: string;
   shippingFee: number;
   hasShipped: boolean;
+  // cart: Array<string>;
+  //total items
+  //total payment
+  //cart items - array
   //token
   // token: string | undefined;
 };
@@ -37,6 +41,7 @@ class OrderCreate extends Component<OrderCreateProps, OrderCreateState> {
       details: 'hello',
       shippingFee: 0,
       hasShipped: false,
+      // cart: []
       // token: this.props.token,
     };
 
@@ -56,7 +61,7 @@ class OrderCreate extends Component<OrderCreateProps, OrderCreateState> {
         hasShipped: this.state.hasShipped,
       },
     };
-    
+
     fetch(url, {
       method: 'POST',
       headers: new Headers({

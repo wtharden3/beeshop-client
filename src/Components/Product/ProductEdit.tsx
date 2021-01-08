@@ -17,4 +17,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState>{
   }
 }
 
+//plant.append('image', this.state.plantImg)
+//must you append() because it's form-data
+
 export default ProductEdit;
