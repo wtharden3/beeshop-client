@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import ProductCreate from './ProductCreate';
+import ProductEdit from './ProductEdit';
 
 type ProductsPortalProps = {
   token: string;
@@ -23,6 +24,7 @@ class ProductsPortal extends Component<ProductsPortalProps, ProductsPortalPortSt
       <div>
         <h1>{this.state.header}</h1>
         <ProductCreate token={this.props.token}/>
+        <ProductEdit token={this.props.token} />
       </div>
     )
   }
