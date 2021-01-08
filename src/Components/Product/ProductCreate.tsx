@@ -12,7 +12,7 @@ type ProductCreateState = {
     description: string;
     category: string;
     subCategory: string;
-    sku: number;
+    sku: string;
     size: string;
   };
 };
@@ -26,7 +26,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: '',
         category: '',
         subCategory: '',
-        sku: 0,
+        sku: '',
         size: '',
       },
     };
@@ -98,7 +98,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: e.currentTarget.valueAsNumber,
+        sku: e.currentTarget.value,
         size: this.state.product.size,
       },
     });
@@ -177,10 +177,17 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
           />
           <input
             type="number"
-            placeholder="Product subcategory"
+            placeholder="Product Sku"
             value={this.state.product.sku}
             onChange={this.handleSkuChange}
           />
+          <input
+            type="text"
+            placeholder="Product Size"
+            value={this.state.product.size}
+            onChange={this.handleSizeChange}
+          />
+          <button>Submit</button>
         </form>
       </div>
     );
