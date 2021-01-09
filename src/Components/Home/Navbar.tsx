@@ -36,18 +36,14 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     return (
       <div>
         <div>The Bee Lounge</div>
-        <button onClick={this.toggleCart}>
-          {' '}
-          cart icon button to target view cart
-        </button>
         <Router>
           <div>
             <ul>
               <li>
-                <Link to="/">Auth</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/home">Home</Link>
+                <Link to="/login">Login/Signup</Link>
               </li>
               <li>
                 <Link to="/orders">View Orders</Link>
@@ -55,16 +51,35 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
+              <li>
+                <button onClick={this.toggleCart}>
+                  cart icon button to target view cart
+                </button>
+              </li>
               <li>Logout</li>
             </ul>
           </div>
+          <div>
+            <p>
+              {this.props.name ? (
+                <p>Hello, {this.props.name}!</p>
+              ) : (
+                <p>Hello, guest!</p>
+              )}
+            </p>
+          </div>
+
+          <div>
+            {this.state.viewCart ? <Cart token={this.props.token} /> : null}
+          </div>
+
           <hr />
           <Switch>
             <Route exact path="/">
-              <Auth setToken={this.props.setToken} />
-            </Route>
-            <Route exact path="/home">
               <Home />
+            </Route>
+            <Route exact path="/login">
+              <Auth setToken={this.props.setToken} />
             </Route>
             <Route exact path="/orders">
               <Orders token={this.props.token} />
@@ -74,8 +89,6 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             </Route>
           </Switch>
         </Router>
-
-        {this.state.viewCart ? <Cart token={this.props.token} /> : null}
       </div>
     );
   }

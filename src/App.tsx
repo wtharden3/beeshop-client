@@ -43,7 +43,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div className="App">
-        <p>{this.state.name ? (<p>Hello, {this.state.name}!</p>): (<p>Hello, guest!</p>)}</p>
+        
         <Navbar
           token={this.state.token}
           name={this.state.name}
