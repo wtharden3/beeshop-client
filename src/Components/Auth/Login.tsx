@@ -2,7 +2,7 @@ import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment'
 
 type LoginProps = {
-  setToken: (data: string) => void;
+  setToken: (data: string, name: string) => void;
 }  
 
 type LoginState = {
@@ -47,8 +47,9 @@ class Login extends Component<LoginProps, LoginState> {
     .then(res => res.json())
     .then(data => {
       console.log('submit data', data)
-      console.log('data.user', data.user)
-      this.props.setToken(data.sessionToken)
+      console.log('data.user', data.user.firstName)
+      const name = `${data.user.firstName} ${data.user.lastName}`
+      this.props.setToken(data.sessionToken, name)
     })
   };
 

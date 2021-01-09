@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 
 // type HomeProps = {
@@ -30,6 +30,11 @@ class Home extends Component<{}, Products> {
     };
 
     // this.displayProducts = this.displayProducts.bind(this)
+  }
+
+  addToCart = (e: MouseEvent): void =>{
+    e.preventDefault();
+    
   }
 
   displayProducts = () => {

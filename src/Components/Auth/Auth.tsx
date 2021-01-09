@@ -3,7 +3,7 @@ import Login from './Login';
 import Signup from './Signup';
 
 type AuthProps = {
-  setToken: (data: string) => void;
+  setToken: (data: string, name: string) => void;
 }
 
 type AuthState = {
