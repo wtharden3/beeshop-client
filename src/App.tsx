@@ -5,6 +5,7 @@ import Home from './Components/Home/Home';
 import Auth from './Components/Auth/Auth';
 import Orders from './Components/Order/Orders';
 import ProductsPortal from './Components/Product/ProductsPortal';
+import Navbar from './Components/Home/Navbar';
 
 //using alias over interfaces //https://medium.com/@koss_lebedev/type-aliases-vs-interfaces-in-typescript-based-react-apps-e77c9a1d5fd0
 
@@ -55,7 +56,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className="App">
         <p>{this.state.token}</p>
-        
+        <Navbar token={this.state.token}/>
         <Router>
           <div>
             <ul>

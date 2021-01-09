@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import OrderCreate from './OrderCreate';
+// import Cart from './Cart';
 
 type OrdersProps = {
   token: string;
@@ -21,7 +21,7 @@ class Orders extends Component<OrdersProps, OrderState> {
     return (
       <div>
         <p>{this.state.token}</p>
-        <OrderCreate token={this.state.token}/>
+        {/* <Cart token={this.state.token}/> */}
       </div>
     );
   }

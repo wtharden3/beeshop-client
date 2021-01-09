@@ -1,19 +1,17 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-
-type OrderCreateProps = {
+//this is Order Create - the C of the CRUD for Orders
+type CartProps = {
   token: string;
 };
 
-//object of product 
+//object of product
+//need a cart
 
-type OrderCreateState = {
-  total: number;
-  subTotal: number;
-  tax: number;
-  details: string;
-  shippingFee: number;
-  hasShipped: boolean;
+type CartState = {
+  totalCost: number;
+  totalItems: number;
+  cart: Array<string | number>;
   // cart: Array<string>;
   //total items
   //total payment
@@ -22,28 +20,26 @@ type OrderCreateState = {
   // token: string | undefined;
 };
 
+type CartObj = {
+  productName: string;
+  productQuantity: number;
+  productCost: number;
+};
+
 type BodyObj = {
   order: {
-    total: number;
-    subTotal: number;
-    tax: number;
-    details: string;
-    shippingFee: number;
-    hasShipped: boolean;
+    totalCost: number;
+    totalItems: number;
   };
 };
 
-class OrderCreate extends Component<OrderCreateProps, OrderCreateState> {
-  constructor(props: OrderCreateProps) {
+class Cart extends Component<CartProps, CartState> {
+  constructor(props: CartProps) {
     super(props);
     this.state = {
-      total: 0,
-      subTotal: 0,
-      tax: 0,
-      details: 'hello',
-      shippingFee: 0,
-      hasShipped: false,
-      // cart: []
+      totalCost: 0,
+      totalItems: 0,
+      cart: [],
       // token: this.props.token,
     };
 
@@ -55,12 +51,8 @@ class OrderCreate extends Component<OrderCreateProps, OrderCreateState> {
     const url: string = `${APIURL}/orders/placeorder`;
     const bodyObj: BodyObj = {
       order: {
-        total: this.state.total,
-        subTotal: this.state.subTotal,
-        tax: this.state.tax,
-        details: this.state.details,
-        shippingFee: this.state.shippingFee,
-        hasShipped: this.state.hasShipped,
+        totalCost: this.state.totalCost,
+        totalItems: this.state.totalItems,
       },
     };
 
@@ -87,9 +79,10 @@ class OrderCreate extends Component<OrderCreateProps, OrderCreateState> {
         <h2>Cart</h2>
         <p>here are your cart details, click below to place your order</p>
         <div>
-          <p>{this.state.details}</p>
-          <p>here is the token below</p>
-          <p>{this.props.token}</p>
+          <p>
+            there should be a button from the store display that allows you to
+            add to cart array cart array should be displayed here using map
+          </p>
         </div>
 
         <button onClick={this.handleClick}>Place Order</button>
@@ -98,4 +91,4 @@ class OrderCreate extends Component<OrderCreateProps, OrderCreateState> {
   }
 }
 
-export default OrderCreate;
+export default Cart;
