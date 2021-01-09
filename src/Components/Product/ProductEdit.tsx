@@ -6,13 +6,28 @@ type ProductEditProps = {
 };
 
 type ProductEditState = {
-  
+  productid: string;
   product: {
     productName: string;
+    productCost: string;
     description: string;
     category: string;
     subCategory: string;
-    sku: string;
+    //sku can equal id
+    size: string;
+  };
+
+};
+
+type BodyObj = {
+  
+  product: {
+    productName: string;
+    productCost: string;
+    description: string;
+    category: string;
+    subCategory: string;
+    
     size: string;
   };
 
@@ -22,13 +37,14 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
   constructor(props: ProductEditProps) {
     super(props);
     this.state = {
-      
+      productid: '',
       product: {
         productName: '',
+        productCost: '',
         description: '',
         category: '',
         subCategory: '',
-        sku: '',
+        
         size: '',
       },
     };
@@ -41,7 +57,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
@@ -54,7 +70,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         description: e.currentTarget.value,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
@@ -67,7 +83,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         description: this.state.product.description,
         category: e.currentTarget.value,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
@@ -80,20 +96,20 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: e.currentTarget.value,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
   };
 
-  handleSkuChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleproductCostChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: e.currentTarget.value,
+        productCost: e.currentTarget.value,
         size: this.state.product.size,
       },
     });
@@ -106,7 +122,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: e.currentTarget.value,
       },
     });
@@ -114,14 +130,15 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
 
   handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-    const url: string = `${APIURL}/products/edit/:productid`;
-    const bodyObj: ProductEditState = {
+    const productid: string = this.state.productid;
+    const url: string = `${APIURL}/products/edit/${productid}`;
+    const bodyObj: BodyObj = {
       product: {
         productName: this.state.product.productName,
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size
       }
     }
@@ -168,9 +185,9 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
           />
           <input
             type="number"
-            placeholder="Product Sku"
-            value={this.state.product.sku}
-            onChange={this.handleSkuChange}
+            placeholder="Product productCost"
+            value={this.state.product.productCost}
+            onChange={this.handleproductCostChange}
           />
           <input
             type="text"

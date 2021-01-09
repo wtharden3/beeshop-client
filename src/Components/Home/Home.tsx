@@ -13,6 +13,7 @@ type Products = {
 type Productobj = {
   id: number;
   productName: string;
+  productCost: string;
   category: string;
   subCategory: string;
   description: string;
@@ -39,6 +40,7 @@ class Home extends Component<{}, Products> {
         <li>{product.productName}</li>
         <li>{product.size}</li>
         <li>{product.description}</li>
+        <li>{product.productCost}</li>
       </ul>
     ));
   };
@@ -68,7 +70,7 @@ class Home extends Component<{}, Products> {
         {/* <h2>{this.state.products.productName}</h2> */}
         <p>{this.state.message}</p>
         <div>
-          {this.state.productList.map(product => (
+          {this.state.productList ? (this.state.productList.map(product => (
             <ul key={product.id}>
               <li><h4>{product.productName}</h4></li>
               <li>{product.category}</li>
@@ -76,7 +78,7 @@ class Home extends Component<{}, Products> {
               <li>{product.size}</li>
               <li>{product.description}</li>
             </ul>
-          ))}
+          ))) : (<div></div>)}
         </div>
       </div>
     );

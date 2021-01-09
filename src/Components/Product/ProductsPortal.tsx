@@ -1,6 +1,7 @@
-import {Component} from 'react';
+import {Component, MouseEvent} from 'react';
 import ProductCreate from './ProductCreate';
 import ProductEdit from './ProductEdit';
+import APIURL from '../../helpers/environment'
 
 type ProductsPortalProps = {
   token: string;
@@ -9,21 +10,85 @@ type ProductsPortalProps = {
 type ProductsPortalPortState = {
   // token: string;
   header: string;
+  message: string;
+  productList: Array<Productobj>;
 }
+
+type Productobj = {
+  id: number;
+  productName: string;
+  productCost: string;
+  category: string;
+  subCategory: string;
+  description: string;
+  size: string;
+  
+};
 
 class ProductsPortal extends Component<ProductsPortalProps, ProductsPortalPortState> {
   constructor(props: ProductsPortalProps){
     super(props);
     this.state = {
       header: 'Products Portal',
+      message: '',
+      productList: []
     }
+  }
+
+  getProducts = (e: MouseEvent): void => {
+    e.preventDefault();
+    fetch(`${APIURL}/products/inventory`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      if(data.products.length > 0){
+      this.setState({productList: data.products});
+      this.setState({message: data.message})
+      console.log('you should see some products! 👀 ')
+      } else {
+        console.log('no data to display')
+      }
+    })
+  }
+
+  componentDidMount(){
+    fetch(`${APIURL}/products/inventory`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      this.setState({productList: data.products});
+      this.setState({message: data.message})
+    })
   }
 
   render(){
     return(
       <div>
         <h1>{this.state.header}</h1>
-        <ProductCreate token={this.props.token}/>
+        {/* display products*/}
+        <div>
+          {this.state.productList.length > 0 ? (this.state.productList.map(product => (
+            <ul key={product.id}>
+              <li><h4>{product.productName}</h4></li>
+              <li>{product.productCost}</li>
+              <li>{product.category}</li>
+              <li>{product.subCategory}</li>
+              <li>{product.size}</li>
+              <li>{product.description}</li>
+            </ul>
+          ))) : (<div>There are no products to display</div>)}
+        </div>
+        <ProductCreate getProducts={this.getProducts} token={this.props.token}/>
         <ProductEdit token={this.props.token} />
       </div>
     )

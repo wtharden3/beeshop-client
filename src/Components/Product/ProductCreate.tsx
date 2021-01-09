@@ -1,8 +1,9 @@
-import { Component, FormEvent } from 'react';
+import { Component, FormEvent, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 
 type ProductCreateProps = {
   token: string;
+  getProducts: (e: MouseEvent) => void;
   // handleProNameChange: (e: FormEvent<HTMLInputElement>) => void;
 };
 
@@ -12,7 +13,7 @@ type ProductCreateState = {
     description: string;
     category: string;
     subCategory: string;
-    sku: string;
+    productCost: string;
     size: string;
   };
 };
@@ -26,7 +27,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: '',
         category: '',
         subCategory: '',
-        sku: '',
+        productCost: '',
         size: '',
       },
     };
@@ -46,7 +47,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
@@ -59,7 +60,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: e.currentTarget.value,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
@@ -72,7 +73,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: this.state.product.description,
         category: e.currentTarget.value,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
@@ -85,20 +86,20 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: e.currentTarget.value,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     });
   };
 
-  handleSkuChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleProductCostChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: e.currentTarget.value,
+        productCost: e.currentTarget.value,
         size: this.state.product.size,
       },
     });
@@ -111,7 +112,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: e.currentTarget.value,
       },
     });
@@ -126,7 +127,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         description: this.state.product.description,
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
-        sku: this.state.product.sku,
+        productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
     };
@@ -177,9 +178,9 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
           />
           <input
             type="number"
-            placeholder="Product Sku"
-            value={this.state.product.sku}
-            onChange={this.handleSkuChange}
+            placeholder="Product Cost"
+            value={this.state.product.productCost}
+            onChange={this.handleProductCostChange}
           />
           <input
             type="text"
@@ -189,6 +190,9 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
           />
           <button>Submit</button>
         </form>
+        <button onClick={this.props.getProducts}>
+          Show updated Product List
+        </button>
       </div>
     );
   }

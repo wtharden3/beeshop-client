@@ -5,6 +5,8 @@ type OrderCreateProps = {
   token: string;
 };
 
+//object of product 
+
 type OrderCreateState = {
   total: number;
   subTotal: number;
