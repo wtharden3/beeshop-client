@@ -29,7 +29,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
       <div>
         <div>The Bee Lounge</div>
         <button onClick={this.toggleCart}> cart icon button to target view cart</button>
-        {this.state.viewCart ? <Cart token={this.props.token} /> : <div>nothing</div>}
+        {this.state.viewCart ? <Cart token={this.props.token} /> : null }
         
       </div>
     );
