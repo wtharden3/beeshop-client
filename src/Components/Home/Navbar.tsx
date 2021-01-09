@@ -11,12 +11,20 @@ type NavbarProps = {
   name: string;
   setToken: (data: string, name: string) => void;
   clearToken: (data: string) => void;
+  // addToCart: (e: MouseEvent, arrayOfProducts: Array<CartArrayType>) => void;
 };
 
 type NavbarState = {
   helper: string;
   viewCart: boolean;
+  cart: Array<CartArrayType>;
 };
+
+type CartArrayType ={
+  productName: string;
+  productQuantity: number;
+  productCost: number;
+}
 
 class Navbar extends Component<NavbarProps, NavbarState> {
   constructor(props: NavbarProps) {
@@ -24,6 +32,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     this.state = {
       helper: '',
       viewCart: false,
+      cart: [],
     };
   }
 
@@ -31,6 +40,11 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     e.preventDefault();
     this.setState({ viewCart: !this.state.viewCart });
   };
+
+  addToCart = (products: CartArrayType): void => {
+    this.state.cart.push(products)
+    // this.setState({cart: arrayOfProducts})
+  }
 
   render() {
     return (
@@ -76,7 +90,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
           <hr />
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home addToCart={this.addToCart} />
             </Route>
             <Route exact path="/login">
               <Auth setToken={this.props.setToken} />

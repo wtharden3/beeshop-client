@@ -1,14 +1,21 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 
-// type HomeProps = {
-//   displayProducts: () => React.ReactNode;
-// }
+type HomeProps = {
+  addToCart: (products: CartObj) => void;
+  //   displayProducts: () => React.ReactNode;
+};
 
 type Products = {
   message: string;
   productList: Array<Productobj>;
 };
+
+type CartObj = {
+  productName: string;
+  productQuantity: number;
+  productCost: number;
+}
 
 type Productobj = {
   id: number;
@@ -21,8 +28,8 @@ type Productobj = {
   sku: number;
 };
 
-class Home extends Component<{}, Products> {
-  constructor(props: any) {
+class Home extends Component<HomeProps, Products> {
+  constructor(props: HomeProps) {
     super(props);
     this.state = {
       message: '',
@@ -32,10 +39,15 @@ class Home extends Component<{}, Products> {
     // this.displayProducts = this.displayProducts.bind(this)
   }
 
-  addToCart = (e: MouseEvent): void =>{
-    e.preventDefault();
-    
-  }
+  // addToCart = (e: MouseEvent): void => {
+  //   e.preventDefault();
+  // };
+  // handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
+  //   e.preventDefault()
+  //   console.log(obj)
+  //   // const prodObj = 
+  //   // this.props.addToCart()
+  // }
 
   displayProducts = () => {
     this.state.productList.map(product => (
@@ -87,6 +99,8 @@ class Home extends Component<{}, Products> {
                 <li>{product.size}</li>
                 <li>{product.description}</li>
                 <button>Add to cart</button>
+                {console.log(product)}
+                {/* when you click the button you will get store the product info in state and then send to order send to cart */}
               </ul>
             ))
           ) : (

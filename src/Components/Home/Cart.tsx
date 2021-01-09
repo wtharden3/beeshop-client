@@ -3,6 +3,7 @@ import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
   token: string;
+  
 };
 
 //object of product
@@ -11,7 +12,7 @@ type CartProps = {
 type CartState = {
   totalCost: number;
   totalItems: number;
-  cart: Array<string | number>;
+  cart: Array<CartObj>;
   // cart: Array<string>;
   //total items
   //total payment
@@ -45,6 +46,8 @@ class Cart extends Component<CartProps, CartState> {
 
     this.handleClick = this.handleClick.bind(this);
   }
+
+  //add to cart has to also update total Cost and totalItems
 
   handleClick = (e: MouseEvent) => {
     e.preventDefault();
