@@ -71,6 +71,8 @@ class Cart extends Component<CartProps, CartState> {
       .then(data => {
         console.log('hello again mark');
         console.log('data', data);
+        //set the total cost and set the totalItems
+        //
       })
       .catch(err => console.log(err));
   };

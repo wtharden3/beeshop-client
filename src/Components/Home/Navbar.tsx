@@ -50,6 +50,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     return (
       <div>
         <div>The Bee Lounge</div>
+
         <Router>
           <div>
             <ul>
@@ -73,6 +74,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               <li>Logout</li>
             </ul>
           </div>
+          
           <div>
             <p>
               {this.props.name ? (
@@ -103,6 +105,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             </Route>
           </Switch>
         </Router>
+
       </div>
     );
   }

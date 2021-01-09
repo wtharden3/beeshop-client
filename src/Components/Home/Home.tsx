@@ -15,7 +15,7 @@ type CartObj = {
   productName: string;
   productQuantity: number;
   productCost: number;
-}
+};
 
 type Productobj = {
   id: number;
@@ -39,29 +39,54 @@ class Home extends Component<HomeProps, Products> {
     // this.displayProducts = this.displayProducts.bind(this)
   }
 
-  // addToCart = (e: MouseEvent): void => {
-  //   e.preventDefault();
-  // };
-  // handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
-  //   e.preventDefault()
-  //   console.log(obj)
-  //   // const prodObj = 
-  //   // this.props.addToCart()
-  // }
-
-  displayProducts = () => {
-    this.state.productList.map(product => (
-      <ul key={product.id}>
-        <li>{product.category}</li>
-        <li>{product.subCategory}</li>
-        <li>{product.productName}</li>
-        <li>{product.size}</li>
-        <li>{product.description}</li>
-        <li>{product.productCost}</li>
-        <button>Add to Cart (displayfn)</button>
-      </ul>
-    ));
+  addToCart = (e: MouseEvent): void => {
+    e.preventDefault();
+    console.log(e);
+    console.log('e.currentTarget ', e.currentTarget.classList.value);
+    //get the value of the className that contains the product id
+    const classValue = e.currentTarget.classList.value;
+    console.log('classValue.length', classValue.length);
+    //turns the string into and array based on spaces
+    const idNumArr = classValue.split('');
+    console.log('classValue.split()', idNumArr);
+    //idNum.splice(0,2) removes 'p-'
+    console.log('idNum.splice(0,2)', idNumArr.splice(0, 2));
+    //that leaves idNum => which just leavs the id number
+    //now I need to join the array to become a string again
+    const idNum = idNumArr.toString();
+    console.log(idNum);
+    //fetch using idNum for :productid
+    fetch(`${APIURL}/products/${idNum}`, {
+      method: 'GET',
+      headers: new Headers({ 'Content-type': 'application/json' }),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   };
+
+  handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
+    e.preventDefault();
+    console.log('OBJ====> ', obj);
+    //find product by id and add name cost and quantity
+
+    // const prodObj =
+    // this.props.addToCart()
+  };
+
+  // displayProducts = () => {
+  //   this.state.productList.map(product => (
+  //     <ul key={product.id}>
+  //       <li>{product.category}</li>
+  //       <li>{product.subCategory}</li>
+  //       <li>{product.productName}</li>
+  //       <li>{product.size}</li>
+  //       <li>{product.description}</li>
+  //       <li>{product.productCost}</li>
+  //       <button>Add to Cart (displayfn)</button>
+  //     </ul>
+  //   ));
+  // };
 
   componentDidMount() {
     fetch(`${APIURL}/products/inventory`, {
@@ -98,7 +123,9 @@ class Home extends Component<HomeProps, Products> {
                 <li>{product.subCategory}</li>
                 <li>{product.size}</li>
                 <li>{product.description}</li>
-                <button>Add to cart</button>
+                <button onClick={this.addToCart} className={`p-${product.id}`}>
+                  Add to cart
+                </button>
                 {console.log(product)}
                 {/* when you click the button you will get store the product info in state and then send to order send to cart */}
               </ul>
