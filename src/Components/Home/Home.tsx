@@ -14,6 +14,7 @@ type Products = {
     productQuantity: number;
     productCost: number;
   };
+  stateChange: number;
 };
 
 type CartObj = {
@@ -44,6 +45,7 @@ class Home extends Component<HomeProps, Products> {
         productQuantity: 0,
         productCost: 0,
       },
+      stateChange: 0,
     };
 
     // this.displayProducts = this.displayProducts.bind(this)
@@ -51,8 +53,6 @@ class Home extends Component<HomeProps, Products> {
 
   addToCart = (e: MouseEvent): void => {
     e.preventDefault();
-    //console.log(e);
-    //console.log('e.currentTarget ', e.currentTarget.classList.value);
     //get the value of the className that contains the product id
     const classValue = e.currentTarget.classList.value;
     //console.log('classValue.length', classValue.length);
@@ -82,12 +82,7 @@ class Home extends Component<HomeProps, Products> {
         }})
         console.log('this.state.product ',this.state.product);
         this.props.addToCartArr(this.state.product);
-        // console.log(data.product.productCost)
-        // console.log(1)
-        //need to update Product Cost and Quantity can use length?
-        //productName may be encorporated as well
-        //need to push into array that contains a collection of objects like type CartObj
-        //cartObj Array needs to be passed to cart and displayed there?
+        this.setState({stateChange: this.state.stateChange + 1})
       })
       .catch(err => console.log(err));
   };
@@ -95,25 +90,7 @@ class Home extends Component<HomeProps, Products> {
   handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
     e.preventDefault();
     console.log('OBJ====> ', obj);
-    //find product by id and add name cost and quantity
-
-    // const prodObj =
-    // this.props.addToCart()
   };
-
-  // displayProducts = () => {
-  //   this.state.productList.map(product => (
-  //     <ul key={product.id}>
-  //       <li>{product.category}</li>
-  //       <li>{product.subCategory}</li>
-  //       <li>{product.productName}</li>
-  //       <li>{product.size}</li>
-  //       <li>{product.description}</li>
-  //       <li>{product.productCost}</li>
-  //       <button>Add to Cart (displayfn)</button>
-  //     </ul>
-  //   ));
-  // };
 
   componentDidMount() {
     fetch(`${APIURL}/products/inventory`, {
@@ -130,6 +107,10 @@ class Home extends Component<HomeProps, Products> {
         this.setState({ productList: data.products });
         this.setState({ message: data.message });
       });
+  }
+
+  componentDidUpdate(){
+    console.log('there was a change on the Home page')
   }
 
   render() {

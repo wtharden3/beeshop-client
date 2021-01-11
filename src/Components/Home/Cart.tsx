@@ -14,6 +14,7 @@ type CartState = {
   totalCost: number;
   totalItems: number;
   cart: Array<CartObj>;
+  cartStateChange: number;
   // cart: Array<string>;
   //total items
   //total payment
@@ -42,26 +43,12 @@ class Cart extends Component<CartProps, CartState> {
       totalCost: 0,
       totalItems: 0,
       cart: [],
+      cartStateChange: 1,
       // token: this.props.token,
     };
 
     this.handleClick = this.handleClick.bind(this);
   }
-
-  //add to cart has to also update total Cost and totalItems
-  // displayCartItems = (): void => {
-  //   this.state.cart.length > 0 ? (
-  //     this.state.cart.map((item: CartObj, index: number) => (
-  //       <ul key={index}>
-  //         <li>{item.productName}</li>
-  //         <li>{item.productQuantity}</li>
-  //         <li>{item.productCost}</li>
-  //       </ul>
-  //     ))
-  //   ) : (
-  //     <div>Cart is empty</div>
-  //   );
-  // };
 
   handleClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -85,15 +72,25 @@ class Cart extends Component<CartProps, CartState> {
       .then(data => {
         // console.log('hello again mark');
         console.log('data', data);
+        console.log('something was added to the cart. CART');
+        this.setState({ cartStateChange: this.state.cartStateChange + 1 });
         //set the total cost and set the totalItems
         //
       })
       .catch(err => console.log(err));
   };
 
-  componentDidUpdate(){
-    // when this.state.cart 
-    
+  componentDidUpdate() {
+    // when this.state.cart
+    console.log('now I want to return the cart mapper. We are on CART');
+      this.props.cart.map((item: CartObj, index: number) => (
+        <ul key={index}>
+          <li>{item.productName}</li>
+          <li>{item.productQuantity}</li>
+          <li>{item.productCost}</li>
+        </ul>
+      ))
+  
   }
 
   render() {
@@ -109,8 +106,8 @@ class Cart extends Component<CartProps, CartState> {
           </p> */}
           {/* <div>{this.displayCartItems()}</div> */}
           <div>
-            {this.state.cart.length > 0 ? (
-              this.state.cart.map((item: CartObj, index: number) => (
+            {this.props.cart.length > 0 ? (
+              this.props.cart.map((item: CartObj, index: number) => (
                 <ul key={index}>
                   <li>{item.productName}</li>
                   <li>{item.productQuantity}</li>
@@ -121,6 +118,7 @@ class Cart extends Component<CartProps, CartState> {
               <div>Cart is empty</div>
             )}
           </div>
+          <div>{this.componentDidUpdate}</div>
         </div>
 
         <button onClick={this.handleClick}>Place Order</button>

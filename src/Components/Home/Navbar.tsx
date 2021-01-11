@@ -61,6 +61,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
 //when the compenent is changed
   componentDidUpdate(){
     console.log('cart[]', this.state.cart)
+    console.log('this is on Navbar.tsx. When button to display Cart is clicked "viewCart" state is changed making it so componentWillUpdate is updated')
   }
 
   render() {
