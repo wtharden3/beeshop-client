@@ -1,9 +1,10 @@
-import { Component, MouseEvent } from 'react';
+import { Component, MouseEvent, PropsWithChildren, ReactChildren } from 'react';
 import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
   token: string;
-  
+  // disPlayCartItems: () => void;
+  cart: Array<CartObj>;
 };
 
 //object of product
@@ -48,6 +49,19 @@ class Cart extends Component<CartProps, CartState> {
   }
 
   //add to cart has to also update total Cost and totalItems
+  // displayCartItems = (): void => {
+  //   this.state.cart.length > 0 ? (
+  //     this.state.cart.map((item: CartObj, index: number) => (
+  //       <ul key={index}>
+  //         <li>{item.productName}</li>
+  //         <li>{item.productQuantity}</li>
+  //         <li>{item.productCost}</li>
+  //       </ul>
+  //     ))
+  //   ) : (
+  //     <div>Cart is empty</div>
+  //   );
+  // };
 
   handleClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -69,13 +83,18 @@ class Cart extends Component<CartProps, CartState> {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('hello again mark');
+        // console.log('hello again mark');
         console.log('data', data);
         //set the total cost and set the totalItems
         //
       })
       .catch(err => console.log(err));
   };
+
+  componentDidUpdate(){
+    // when this.state.cart 
+    
+  }
 
   render() {
     return (
@@ -84,10 +103,24 @@ class Cart extends Component<CartProps, CartState> {
         <h2>Cart</h2>
         <p>here are your cart details, click below to place your order</p>
         <div>
-          <p>
+          {/* <p>
             there should be a button from the store display that allows you to
             add to cart array cart array should be displayed here using map
-          </p>
+          </p> */}
+          {/* <div>{this.displayCartItems()}</div> */}
+          <div>
+            {this.state.cart.length > 0 ? (
+              this.state.cart.map((item: CartObj, index: number) => (
+                <ul key={index}>
+                  <li>{item.productName}</li>
+                  <li>{item.productQuantity}</li>
+                  <li>{item.productCost}</li>
+                </ul>
+              ))
+            ) : (
+              <div>Cart is empty</div>
+            )}
+          </div>
         </div>
 
         <button onClick={this.handleClick}>Place Order</button>

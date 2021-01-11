@@ -2,13 +2,18 @@ import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 
 type HomeProps = {
-  addToCart: (products: CartObj) => void;
+  addToCartArr: (products: CartObj) => void;
   //   displayProducts: () => React.ReactNode;
 };
 
 type Products = {
   message: string;
   productList: Array<Productobj>;
+  product: {
+    productName: string;
+    productQuantity: number;
+    productCost: number;
+  };
 };
 
 type CartObj = {
@@ -34,6 +39,11 @@ class Home extends Component<HomeProps, Products> {
     this.state = {
       message: '',
       productList: [],
+      product: {
+        productName: '',
+        productQuantity: 0,
+        productCost: 0,
+      },
     };
 
     // this.displayProducts = this.displayProducts.bind(this)
@@ -41,27 +51,44 @@ class Home extends Component<HomeProps, Products> {
 
   addToCart = (e: MouseEvent): void => {
     e.preventDefault();
-    console.log(e);
-    console.log('e.currentTarget ', e.currentTarget.classList.value);
+    //console.log(e);
+    //console.log('e.currentTarget ', e.currentTarget.classList.value);
     //get the value of the className that contains the product id
     const classValue = e.currentTarget.classList.value;
-    console.log('classValue.length', classValue.length);
+    //console.log('classValue.length', classValue.length);
     //turns the string into and array based on spaces
     const idNumArr = classValue.split('');
-    console.log('classValue.split()', idNumArr);
+    //console.log('classValue.split()', idNumArr);
     //idNum.splice(0,2) removes 'p-'
-    console.log('idNum.splice(0,2)', idNumArr.splice(0, 2));
+    idNumArr.splice(0, 2);
     //that leaves idNum => which just leavs the id number
     //now I need to join the array to become a string again
     const idNum = idNumArr.toString();
-    console.log(idNum);
+    //console.log(idNum);
     //fetch using idNum for :productid
     fetch(`${APIURL}/products/${idNum}`, {
       method: 'GET',
       headers: new Headers({ 'Content-type': 'application/json' }),
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        console.log(data.product.productName)
+        this.setState({product: {
+          productName: data.product.productName,
+          productQuantity: 1,
+          productCost: data.product.productCost,
+
+        }})
+        console.log('this.state.product ',this.state.product);
+        this.props.addToCartArr(this.state.product);
+        // console.log(data.product.productCost)
+        // console.log(1)
+        //need to update Product Cost and Quantity can use length?
+        //productName may be encorporated as well
+        //need to push into array that contains a collection of objects like type CartObj
+        //cartObj Array needs to be passed to cart and displayed there?
+      })
       .catch(err => console.log(err));
   };
 

@@ -41,9 +41,26 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     this.setState({ viewCart: !this.state.viewCart });
   };
 
-  addToCart = (products: CartArrayType): void => {
+  addToCartArr = (products: CartArrayType): void => {
     this.state.cart.push(products)
     // this.setState({cart: arrayOfProducts})
+  }
+
+  // disPlayCartItems = (): void => {
+  //   this.state.cart.length >0 ? this.state.cart.map((item: CartArrayType, index: number) => (<ul key={index}>
+  //     <li>{item.productName}</li>
+  //     <li>{item.productQuantity}</li>
+  //     <li>{item.productCost}</li>
+  //   </ul>)) : (<div>Cart is empty</div>)
+  // }
+
+  componentDidMount(){
+    console.log('cart[]', this.state.cart)
+  }
+
+//when the compenent is changed
+  componentDidUpdate(){
+    console.log('cart[]', this.state.cart)
   }
 
   render() {
@@ -74,7 +91,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               <li>Logout</li>
             </ul>
           </div>
-          
+
           <div>
             <p>
               {this.props.name ? (
@@ -86,13 +103,13 @@ class Navbar extends Component<NavbarProps, NavbarState> {
           </div>
 
           <div>
-            {this.state.viewCart ? <Cart token={this.props.token} /> : null}
+            {this.state.viewCart ? <Cart cart={this.state.cart} token={this.props.token} /> : null}
           </div>
 
           <hr />
           <Switch>
             <Route exact path="/">
-              <Home addToCart={this.addToCart} />
+              <Home addToCartArr={this.addToCartArr} />
             </Route>
             <Route exact path="/login">
               <Auth setToken={this.props.setToken} />
