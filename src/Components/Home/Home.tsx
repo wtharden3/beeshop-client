@@ -149,6 +149,7 @@ class Home extends Component<HomeProps, Products> {
                 <li>{product.subCategory}</li>
                 <li>{product.size}</li>
                 <li>{product.description}</li>
+                <li>{product.productCost}</li>
                 <button color="primary" onClick={this.addToCart} className={`p-${product.id}`}>
                   Add to cart
                 </button>

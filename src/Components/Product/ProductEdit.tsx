@@ -1,21 +1,21 @@
 import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import { Button } from 'antd';
 
 type ProductEditProps = {
   token: string;
+  id: number;
 };
 
 type ProductEditState = {
-  productid: string;
+  productid: number;
   product: {
     productName: string;
     productCost: string;
     description: string;
     category: string;
     subCategory: string;
-    //sku can equal id
+    // id: number;
     size: string;
   };
 
@@ -39,20 +39,20 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
   constructor(props: ProductEditProps) {
     super(props);
     this.state = {
-      productid: '',
+      productid: this.props.id,
       product: {
         productName: '',
         productCost: '',
         description: '',
         category: '',
         subCategory: '',
-        //id
+        // id: 0,
         size: '',
       },
     };
   }
 
-  handleNameChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleEditNameChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: e.currentTarget.value, //currentTarget vs target
@@ -60,12 +60,13 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
         productCost: this.state.product.productCost,
+        // id: this.state.product.id,
         size: this.state.product.size,
       },
     });
   };
 
-  handleDescriptionChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleEditDescriptionChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
@@ -73,12 +74,13 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
         productCost: this.state.product.productCost,
+        // id: this.state.product.id,
         size: this.state.product.size,
       },
     });
   };
 
-  handleCategoryChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleEditCategoryChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
@@ -86,12 +88,13 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         category: e.currentTarget.value,
         subCategory: this.state.product.subCategory,
         productCost: this.state.product.productCost,
+        // id: this.state.product.id,
         size: this.state.product.size,
       },
     });
   };
 
-  handleProdSubcategoryChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleEditProdSubcategoryChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
@@ -99,12 +102,13 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         category: this.state.product.category,
         subCategory: e.currentTarget.value,
         productCost: this.state.product.productCost,
+        // id: this.state.product.id,
         size: this.state.product.size,
       },
     });
   };
 
-  handleproductCostChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleEditproductCostChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
@@ -112,12 +116,13 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
         productCost: e.currentTarget.value,
+        // id: this.state.product.id,
         size: this.state.product.size,
       },
     });
   };
 
-  handleSizeChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleEditSizeChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
@@ -125,14 +130,15 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
         productCost: this.state.product.productCost,
+        // id: this.state.product.id,
         size: e.currentTarget.value,
       },
     });
   };
 
-  handleSubmit = (e: FormEvent): void => {
+  handleEditSubmit = (e: FormEvent): void => {
     e.preventDefault();
-    const productid: string = this.state.productid;
+    const productid: number = this.state.productid;
     const url: string = `${APIURL}/products/edit/${productid}`;
     const bodyObj: BodyObj = {
       product: {
@@ -153,6 +159,8 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         Authorization: this.props.token
       })
     })
+    .then(res => res.json())
+    .then(data => console.log(data))
   }
 
   render() {
@@ -160,44 +168,44 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
       <div>
         this will be a modal or pop out
         <h2>Product Edit</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleEditSubmit}>
           <input
             type="text"
             placeholder="Product Name"
             value={this.state.product.productName}
-            onChange={this.handleNameChange}
+            onChange={this.handleEditNameChange}
           />
           <input
             type="text"
             placeholder="Product Description"
             value={this.state.product.description}
-            onChange={this.handleDescriptionChange}
+            onChange={this.handleEditDescriptionChange}
           />
           <input
             type="text"
             placeholder="Product Category"
             value={this.state.product.category}
-            onChange={this.handleCategoryChange}
+            onChange={this.handleEditCategoryChange}
           />
           <input
             type="text"
             placeholder="Product subcategory"
             value={this.state.product.subCategory}
-            onChange={this.handleProdSubcategoryChange}
+            onChange={this.handleEditProdSubcategoryChange}
           />
           <input
             type="number"
             placeholder="Product productCost"
             value={this.state.product.productCost}
-            onChange={this.handleproductCostChange}
+            onChange={this.handleEditproductCostChange}
           />
           <input
             type="text"
             placeholder="Product Size"
             value={this.state.product.size}
-            onChange={this.handleSizeChange}
+            onChange={this.handleEditSizeChange}
           />
-          <Button variant="contained" color="primary">Submit</Button>
+          <Button type="primary" onClick={this.handleEditSubmit}>Submit</Button>
         </form>
       </div>
     );
