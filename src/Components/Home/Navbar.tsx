@@ -12,19 +12,25 @@ type NavbarProps = {
   setToken: (data: string, name: string) => void;
   clearToken: (data: string) => void;
   // addToCart: (e: MouseEvent, arrayOfProducts: Array<CartArrayType>) => void;
+  
 };
 
 type NavbarState = {
   helper: string;
   viewCart: boolean;
+  //these get passed on to Home and Cart
   cart: Array<CartArrayType>;
+  productTotal: string;
+  productCostTotal: string;
+  prodNames: Array<string>;
+  prodCost: Array<number>;
 };
 
-type CartArrayType ={
+type CartArrayType = {
   productName: string;
   productQuantity: number;
   productCost: number;
-}
+};
 
 class Navbar extends Component<NavbarProps, NavbarState> {
   constructor(props: NavbarProps) {
@@ -33,6 +39,10 @@ class Navbar extends Component<NavbarProps, NavbarState> {
       helper: '',
       viewCart: false,
       cart: [],
+      productTotal: '0',
+      productCostTotal: '0',
+      prodNames: [],
+      prodCost: []
     };
   }
 
@@ -41,10 +51,26 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     this.setState({ viewCart: !this.state.viewCart });
   };
 
+//this is passed on to HOMe
   addToCartArr = (products: CartArrayType): void => {
-    this.state.cart.push(products)
+    this.state.cart.push(products);
+    console.log('from NAVBAR this.state.cart ===>', this.state.cart)
+    //const cartArr = this.state.cart;
+    this.state.cart.map(product => {
+      this.state.prodNames.push(product.productName)
+      this.state.prodCost.push(product.productCost)
+    })
+    console.log('from NAVBAR - CART=====>', this.state.cart)
+    // console.log('prodNames==>', this.state.prodNames)
+    // console.log('prodCosts==>', this.state.prodCost)
     // this.setState({cart: arrayOfProducts})
-  }
+  };
+
+//this is passed on to HOMe
+  updateTotals = (prodCount: number, prodCost: number): void => {
+    this.setState({productTotal: prodCount.toString()});
+    this.setState({productCostTotal: prodCost.toString()});
+  };
 
   // disPlayCartItems = (): void => {
   //   this.state.cart.length >0 ? this.state.cart.map((item: CartArrayType, index: number) => (<ul key={index}>
@@ -54,14 +80,17 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   //   </ul>)) : (<div>Cart is empty</div>)
   // }
 
-  componentDidMount(){
-    console.log('cart[]', this.state.cart)
+  componentDidMount() {
+    //console.log('cart[]', this.state.cart);
   }
 
-//when the compenent is changed
-  componentDidUpdate(){
-    console.log('cart[]', this.state.cart)
-    console.log('this is on Navbar.tsx. When button to display Cart is clicked "viewCart" state is changed making it so componentWillUpdate is updated')
+  //when the compenent is changed
+  componentDidUpdate() {
+    // console.log('cart[]', this.state.cart);
+    // console.log(
+    //   'this is on Navbar.tsx. When button to display Cart is clicked "viewCart" state is changed making it so componentWillUpdate is updated'
+    // );
+    // console.log('from NAVBAR this.state.cart ===>', this.state.cart)
   }
 
   render() {
@@ -104,13 +133,24 @@ class Navbar extends Component<NavbarProps, NavbarState> {
           </div>
 
           <div>
-            {this.state.viewCart ? <Cart cart={this.state.cart} token={this.props.token} /> : null}
+            {this.state.viewCart ? (
+              <Cart
+                cart={this.state.cart}
+                productTotal={this.state.productTotal}
+                productCostTotal={this.state.productCostTotal}
+                token={this.props.token}
+              />
+            ) : null}
           </div>
 
           <hr />
           <Switch>
             <Route exact path="/">
-              <Home addToCartArr={this.addToCartArr} />
+              <Home 
+              cart={this.state.cart}
+              addToCartArr={this.addToCartArr} 
+              updateTotals={this.updateTotals}
+              />
             </Route>
             <Route exact path="/login">
               <Auth setToken={this.props.setToken} />
@@ -123,7 +163,6 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             </Route>
           </Switch>
         </Router>
-
       </div>
     );
   }

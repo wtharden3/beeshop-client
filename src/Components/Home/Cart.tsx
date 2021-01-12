@@ -1,10 +1,14 @@
-import { Component, MouseEvent, PropsWithChildren, ReactChildren } from 'react';
+import { Component, MouseEvent} from 'react';
 import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
   token: string;
   // disPlayCartItems: () => void;
+  //below are brought in from NavBar
+  productTotal: string;
+  productCostTotal: string;
   cart: Array<CartObj>;
+  // updateTotals: (prodCount: number, prodCost: number) => void;
 };
 
 //object of product
@@ -13,17 +17,18 @@ type CartProps = {
 type CartState = {
   totalCost: number;
   totalItems: number;
-  cart: Array<CartObj>;
+  cartTotals: Array<CartTotalObj>;
+  cartProducts: Array<string>;
+  cartCosts: Array<string>;
   cartStateChange: number;
-  // cart: Array<string>;
-  //total items
-  //total payment
-  //cart items - array
-  //token
-  // token: string | undefined;
 };
 
 type CartObj = {
+  productName: string;
+  productQuantity: number;
+  productCost: number;
+};
+type CartTotalObj = {
   productName: string;
   productQuantity: number;
   productCost: number;
@@ -42,8 +47,10 @@ class Cart extends Component<CartProps, CartState> {
     this.state = {
       totalCost: 0,
       totalItems: 0,
-      cart: [],
+      cartTotals: [],
       cartStateChange: 1,
+      cartCosts: [],
+      cartProducts: [],
       // token: this.props.token,
     };
 
@@ -71,9 +78,17 @@ class Cart extends Component<CartProps, CartState> {
       .then(res => res.json())
       .then(data => {
         // console.log('hello again mark');
-        console.log('data', data);
+        console.log('data', data.order);
+        //map through data
+        data.order.map((item: CartObj) => console.log(item))
         console.log('something was added to the cart. CART');
         this.setState({ cartStateChange: this.state.cartStateChange + 1 });
+        console.log(this.props.cart);
+        //do a map to add productName to the cartProductNames
+        //in that same map add all cost to the cartProductCost
+        //do an array methods to account the amout of products .length
+        //find a way to add the totals of all totals in the cartProductCost Array
+
         //set the total cost and set the totalItems
         //
       })
@@ -82,15 +97,14 @@ class Cart extends Component<CartProps, CartState> {
 
   componentDidUpdate() {
     // when this.state.cart
-    console.log('now I want to return the cart mapper. We are on CART');
-      this.props.cart.map((item: CartObj, index: number) => (
-        <ul key={index}>
-          <li>{item.productName}</li>
-          <li>{item.productQuantity}</li>
-          <li>{item.productCost}</li>
-        </ul>
-      ))
-  
+    // console.log('now I want to return the cart mapper. We are on CART');
+    // this.props.cart.map((item: CartObj, index: number) => (
+    //   <ul key={index}>
+    //     <li>{item.productName}</li>
+    //     <li>{item.productQuantity}</li>
+    //     <li>{item.productCost}</li>
+    //   </ul>
+    // ));
   }
 
   render() {
@@ -118,7 +132,7 @@ class Cart extends Component<CartProps, CartState> {
               <div>Cart is empty</div>
             )}
           </div>
-          <div>{this.componentDidUpdate}</div>
+          
         </div>
 
         <button onClick={this.handleClick}>Place Order</button>

@@ -3,6 +3,8 @@ import APIURL from '../../helpers/environment';
 
 type HomeProps = {
   addToCartArr: (products: CartObj) => void;
+  updateTotals: (prodCount: number, prodCost: number) => void;
+  cart: Array<CartObj>;
   //   displayProducts: () => React.ReactNode;
 };
 
@@ -15,6 +17,8 @@ type Products = {
     productCost: number;
   };
   stateChange: number;
+  productNames: Array<string>;
+  productCosts: Array<number>;
 };
 
 type CartObj = {
@@ -46,6 +50,8 @@ class Home extends Component<HomeProps, Products> {
         productCost: 0,
       },
       stateChange: 0,
+      productNames: [],
+      productCosts: [],
     };
 
     // this.displayProducts = this.displayProducts.bind(this)
@@ -55,16 +61,13 @@ class Home extends Component<HomeProps, Products> {
     e.preventDefault();
     //get the value of the className that contains the product id
     const classValue = e.currentTarget.classList.value;
-    //console.log('classValue.length', classValue.length);
     //turns the string into and array based on spaces
     const idNumArr = classValue.split('');
-    //console.log('classValue.split()', idNumArr);
     //idNum.splice(0,2) removes 'p-'
     idNumArr.splice(0, 2);
     //that leaves idNum => which just leavs the id number
     //now I need to join the array to become a string again
     const idNum = idNumArr.toString();
-    //console.log(idNum);
     //fetch using idNum for :productid
     fetch(`${APIURL}/products/${idNum}`, {
       method: 'GET',
@@ -72,25 +75,27 @@ class Home extends Component<HomeProps, Products> {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        console.log(data.product.productName)
-        this.setState({product: {
-          productName: data.product.productName,
-          productQuantity: 1,
-          productCost: data.product.productCost,
+        console.log('THIS IS DATA FROM ADDPRODUCT', data);
+        console.log(data.product.productName);
+        this.setState({
+          product: {
+            productName: data.product.productName,
+            productQuantity: 1,
+            productCost: data.product.productCost,
+          },
+        });
 
-        }})
-        console.log('this.state.product ',this.state.product);
+        console.log('this.state.product ', this.state.product);
         this.props.addToCartArr(this.state.product);
-        this.setState({stateChange: this.state.stateChange + 1})
+        // this.setState({ stateChange: this.state.stateChange + 1 });
       })
       .catch(err => console.log(err));
   };
 
-  handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
-    e.preventDefault();
-    console.log('OBJ====> ', obj);
-  };
+  // handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
+  //   e.preventDefault();
+  //   console.log('OBJ====> ', obj);
+  // };
 
   componentDidMount() {
     fetch(`${APIURL}/products/inventory`, {
@@ -101,16 +106,29 @@ class Home extends Component<HomeProps, Products> {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log('data.products', data.products);
-        // console.log(typeof data);
-        // console.log('data', data);
         this.setState({ productList: data.products });
         this.setState({ message: data.message });
+        console.log('from HOME productList', this.state.productList);
       });
   }
 
-  componentDidUpdate(){
-    console.log('there was a change on the Home page')
+  componentDidUpdate() {
+    console.log('from HOME productList---update', this.state.productList);
+    console.log('from HOME productList---update', this.state.productList[0]);
+    
+    // console.log('PROPS CART',this.props.cart);
+    // const cartArr = this.props.cart;
+    // cartArr.map(product => {
+    //   this.state.productNames.push(product.productName);
+    //   this.state.productCosts.push(product.productCost); //already a number
+    // });
+    // //push product.productName into array productNames
+    // //push product.productCost into array productCosts
+    // console.log('productNames Array===>', this.state.productNames);
+    // console.log('productNames.lengths Array===>', this.state.productNames);
+    // console.log('productCosts Array===>', this.state.productCosts);
+    // //this.setState({})
+    // console.log('there was a change on the Home page');
   }
 
   render() {
