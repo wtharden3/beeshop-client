@@ -41,7 +41,12 @@ class Orders extends Component<OrdersProps, OrderState> {
       .then(res => res.json())
       .then(data => {
         console.log('orders data', data.order);
+        if (data.order){
+
         this.setState({ orders: data.order });
+        } else {
+          console.log('there is no orders yet')
+        }
       })
       .catch(err => console.log(err));
   }

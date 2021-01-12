@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# The Beeshop client project 
+## Whitney Harden 
+[Whitney's Github](https://github.com/)wtharden3
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This project was created utilizing, react (stateful components) and TypeScript. 
 
 ## Available Scripts
 
@@ -44,3 +46,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## For clones
+
+if you clone the project, make sure to run `npm install` for node modules
