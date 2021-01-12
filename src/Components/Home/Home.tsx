@@ -1,11 +1,15 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 type HomeProps = {
   addToCartArr: (products: CartObj) => void;
   updateTotals: (prodCount: number, prodCost: number) => void;
   cart: Array<CartObj>;
   //   displayProducts: () => React.ReactNode;
+  //classes: PropTypes.object.isRequired,
 };
 
 type Products = {
@@ -87,15 +91,11 @@ class Home extends Component<HomeProps, Products> {
 
         console.log('this.state.product ', this.state.product);
         this.props.addToCartArr(this.state.product);
+        console.log('cartArr', this.props.cart)
         // this.setState({ stateChange: this.state.stateChange + 1 });
       })
       .catch(err => console.log(err));
   };
-
-  // handleAddToCartBtn = (e: MouseEvent, obj: Productobj): void => {
-  //   e.preventDefault();
-  //   console.log('OBJ====> ', obj);
-  // };
 
   componentDidMount() {
     fetch(`${APIURL}/products/inventory`, {
@@ -108,14 +108,14 @@ class Home extends Component<HomeProps, Products> {
       .then(data => {
         this.setState({ productList: data.products });
         this.setState({ message: data.message });
-        console.log('from HOME productList', this.state.productList);
+        //console.log('from HOME productList', this.state.productList);
       });
   }
 
   componentDidUpdate() {
-    console.log('from HOME productList---update', this.state.productList);
-    console.log('from HOME productList---update', this.state.productList[0]);
-    
+    // console.log('from HOME productList---update', this.state.productList);
+    // console.log('from HOME productList---update', this.state.productList[0]);
+
     // console.log('PROPS CART',this.props.cart);
     // const cartArr = this.props.cart;
     // cartArr.map(product => {
@@ -149,7 +149,7 @@ class Home extends Component<HomeProps, Products> {
                 <li>{product.subCategory}</li>
                 <li>{product.size}</li>
                 <li>{product.description}</li>
-                <button onClick={this.addToCart} className={`p-${product.id}`}>
+                <button color="primary" onClick={this.addToCart} className={`p-${product.id}`}>
                   Add to cart
                 </button>
                 {console.log(product)}
@@ -164,5 +164,9 @@ class Home extends Component<HomeProps, Products> {
     );
   }
 }
+
+// Home.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default Home;

@@ -6,21 +6,22 @@ type OrdersProps = {
 };
 
 type OrderState = {
-  token: string;
+  //token: string;
 };
 
 class Orders extends Component<OrdersProps, OrderState> {
   constructor(props: OrdersProps) {
     super(props);
     this.state = {
-      token: this.props.token,
+      //token: this.props.token,
     };
   }
 
   render() {
+    const {token} = this.props;
     return (
       <div>
-        <p>{this.state.token}</p>
+        <p>{token}</p>
         {/* <Cart token={this.state.token}/> */}
       </div>
     );

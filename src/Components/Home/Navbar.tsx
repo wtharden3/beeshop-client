@@ -12,10 +12,13 @@ type NavbarProps = {
   setToken: (data: string, name: string) => void;
   clearToken: (data: string) => void;
   // addToCart: (e: MouseEvent, arrayOfProducts: Array<CartArrayType>) => void;
-  
 };
 
 type NavbarState = {
+  //material ui
+  anchorEl: null | HTMLElement;
+  mobileMoreAnchorEl: null | HTMLElement;
+  //end material ui
   helper: string;
   viewCart: boolean;
   //these get passed on to Home and Cart
@@ -36,13 +39,15 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   constructor(props: NavbarProps) {
     super(props);
     this.state = {
+      anchorEl: null,
+      mobileMoreAnchorEl: null,
       helper: '',
       viewCart: false,
       cart: [],
       productTotal: '0',
       productCostTotal: '0',
       prodNames: [],
-      prodCost: []
+      prodCost: [],
     };
   }
 
@@ -51,25 +56,24 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     this.setState({ viewCart: !this.state.viewCart });
   };
 
-//this is passed on to HOMe
+  //this is passed on to HOMe
   addToCartArr = (products: CartArrayType): void => {
     this.state.cart.push(products);
-    console.log('from NAVBAR this.state.cart ===>', this.state.cart)
+    console.log('from NAVBAR this.state.cart ===>', this.state.cart);
     //const cartArr = this.state.cart;
     this.state.cart.map(product => {
-      this.state.prodNames.push(product.productName)
-      this.state.prodCost.push(product.productCost)
-    })
-    console.log('from NAVBAR - CART=====>', this.state.cart)
+      this.state.prodNames.push(product.productName);
+      this.state.prodCost.push(product.productCost);
+    });
+    console.log('from NAVBAR - CART=====>', this.state.cart);
     // console.log('prodNames==>', this.state.prodNames)
     // console.log('prodCosts==>', this.state.prodCost)
     // this.setState({cart: arrayOfProducts})
   };
 
-//this is passed on to HOMe
-  updateTotals = (prodCount: number, prodCost: number): void => {
-    this.setState({productTotal: prodCount.toString()});
-    this.setState({productCostTotal: prodCost.toString()});
+  //this is passed on to HOMe
+  updateTotals = (prodCost: number): void => {
+    this.setState({ productCostTotal: prodCost.toString() });
   };
 
   // disPlayCartItems = (): void => {
@@ -79,6 +83,25 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   //     <li>{item.productCost}</li>
   //   </ul>)) : (<div>Cart is empty</div>)
   // }
+
+  //from MATERIAL UI
+  handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleMenuClose = () => {
+    this.setState({ anchorEl: null });
+    this.handleMobileMenuClose();
+  };
+
+  handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    this.setState({ mobileMoreAnchorEl: event.currentTarget });
+  };
+
+  handleMobileMenuClose = () => {
+    this.setState({ mobileMoreAnchorEl: null });
+  };
+  // END MATERIAL UI
 
   componentDidMount() {
     //console.log('cart[]', this.state.cart);
@@ -94,6 +117,15 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   }
 
   render() {
+    //state
+    const { cart, productTotal, viewCart, productCostTotal, anchorEl, mobileMoreAnchorEl } = this.state;
+    //props
+    const { name, token, setToken } = this.props;
+
+    //FROM MATERIAL UI
+    // const isMenuOpen = Boolean(anchorEl);
+    // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    // END MATERIAL UI
     return (
       <div>
         <div>The Bee Lounge</div>
@@ -123,22 +155,16 @@ class Navbar extends Component<NavbarProps, NavbarState> {
           </div>
 
           <div>
-            <p>
-              {this.props.name ? (
-                <p>Hello, {this.props.name}!</p>
-              ) : (
-                <p>Hello, guest!</p>
-              )}
-            </p>
+            <p>{name ? <p>Hello, {name}!</p> : <p>Hello, guest!</p>}</p>
           </div>
 
           <div>
-            {this.state.viewCart ? (
+            {viewCart ? (
               <Cart
-                cart={this.state.cart}
-                productTotal={this.state.productTotal}
-                productCostTotal={this.state.productCostTotal}
-                token={this.props.token}
+                cart={cart}
+                productTotal={productTotal}
+                productCostTotal={productCostTotal}
+                token={token}
               />
             ) : null}
           </div>
@@ -146,20 +172,20 @@ class Navbar extends Component<NavbarProps, NavbarState> {
           <hr />
           <Switch>
             <Route exact path="/">
-              <Home 
-              cart={this.state.cart}
-              addToCartArr={this.addToCartArr} 
-              updateTotals={this.updateTotals}
+              <Home
+                cart={cart}
+                addToCartArr={this.addToCartArr}
+                updateTotals={this.updateTotals}
               />
             </Route>
             <Route exact path="/login">
-              <Auth setToken={this.props.setToken} />
+              <Auth setToken={setToken} />
             </Route>
             <Route exact path="/orders">
-              <Orders token={this.props.token} />
+              <Orders token={token} />
             </Route>
             <Route exact path="/dashboard">
-              <ProductsPortal token={this.props.token} />
+              <ProductsPortal token={token} />
             </Route>
           </Switch>
         </Router>

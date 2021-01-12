@@ -41,14 +41,18 @@ class App extends Component<AppProps, AppState> {
   };
 
   render() {
+    //state - so we don't have to keep typing 'this.state.token' for  example
+    const {token, name } = this.state;
+    //props - methods
+    const {setToken, clearToken} = this;
     return (
       <div className="App">
         
         <Navbar
-          token={this.state.token}
-          name={this.state.name}
-          setToken={this.setToken}
-          clearToken={this.clearToken}
+          token={token}
+          name={name}
+          setToken={setToken}
+          clearToken={clearToken}
         />
       </div>
     );

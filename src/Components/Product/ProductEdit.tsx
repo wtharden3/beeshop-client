@@ -1,5 +1,7 @@
 import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 
 type ProductEditProps = {
   token: string;
@@ -44,7 +46,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
         description: '',
         category: '',
         subCategory: '',
-        
+        //id
         size: '',
       },
     };
@@ -195,7 +197,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
             value={this.state.product.size}
             onChange={this.handleSizeChange}
           />
-          <button>Submit</button>
+          <Button variant="contained" color="primary">Submit</Button>
         </form>
       </div>
     );

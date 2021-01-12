@@ -1,5 +1,6 @@
 import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment'
+import Button from '@material-ui/core/Button';
 
 type LoginProps = {
   setToken: (data: string, name: string) => void;
@@ -15,7 +16,7 @@ class Login extends Component<LoginProps, LoginState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      email: 'spender@email.com',
+      email: 'boss@email.com',
       password: 'pass',
       // token: '',
     };

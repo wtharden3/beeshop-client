@@ -1,4 +1,4 @@
-import { Component, MouseEvent} from 'react';
+import { Component, MouseEvent, DetailedHTMLProps} from 'react';
 import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
@@ -46,7 +46,7 @@ class Cart extends Component<CartProps, CartState> {
     super(props);
     this.state = {
       totalCost: 0,
-      totalItems: 0,
+      totalItems: this.props.cart.length,
       cartTotals: [],
       cartStateChange: 1,
       cartCosts: [],
@@ -57,7 +57,44 @@ class Cart extends Component<CartProps, CartState> {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  
+
+  increment = () => {
+    this.setState(
+      prevState => ({ cartStateChange: prevState.cartStateChange + 1 })
+    )
+  };
+
+  //update totals
+  //updateTotals() //params come from home component
+
+  updateCartCost = () => {
+    return this.props.cart.map( (cartItem: CartObj) =>{
+      //prodCost.toFixed(2) - for 2 decimal points
+      const prodCost = (Math.round(cartItem.productCost * 100) / 100) + (Math.floor(cartItem.productCost * 100) /100);
+      this.setState({totalCost: prodCost})
+      console.log(this.state.totalCost)
+      return(
+        <div>
+          {this.state.totalCost}
+        </div>
+      )
+    })
+  }
+
+  // updateCartCost = () => {
+  //   this.props.cart.map((cartItem: CartObj) => {
+  //           const prodCost = cartItem.productCost + cartItem.productCost;
+  //           return this.setState({totalCost: prodCost});
+  // },}
+
   handleClick = (e: MouseEvent) => {
+    //update totals
+    // this.setState({order: {
+    //   totalCost: newCost,
+    //   totalItems: newItems,
+    // }})
+
     e.preventDefault();
     const url: string = `${APIURL}/orders/placeorder`;
     const bodyObj: BodyObj = {
@@ -82,8 +119,9 @@ class Cart extends Component<CartProps, CartState> {
         //map through data
         data.order.map((item: CartObj) => console.log(item))
         console.log('something was added to the cart. CART');
-        this.setState({ cartStateChange: this.state.cartStateChange + 1 });
+        this.increment();
         console.log(this.props.cart);
+
         //do a map to add productName to the cartProductNames
         //in that same map add all cost to the cartProductCost
         //do an array methods to account the amout of products .length
@@ -132,7 +170,10 @@ class Cart extends Component<CartProps, CartState> {
               <div>Cart is empty</div>
             )}
           </div>
-          
+          <button onClick={this.updateCartCost}>click for cost
+          </button>
+          <div>You have {this.props.cart.length} items in your cart</div>
+          <div>{this.state.totalCost} is the total cost of the items in your cart</div>
         </div>
 
         <button onClick={this.handleClick}>Place Order</button>
