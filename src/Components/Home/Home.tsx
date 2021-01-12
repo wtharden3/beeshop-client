@@ -154,6 +154,7 @@ class Home extends Component<HomeProps, Products> {
                 </button>
                 {console.log(product)}
                 {/* when you click the button you will get store the product info in state and then send to order send to cart */}
+                <hr />
               </ul>
             ))
           ) : (
