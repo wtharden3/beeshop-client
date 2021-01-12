@@ -1,4 +1,4 @@
-import { Component, MouseEvent, DetailedHTMLProps} from 'react';
+import { Component, MouseEvent, DetailedHTMLProps } from 'react';
 import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
@@ -19,7 +19,7 @@ type CartState = {
   totalItems: number;
   cartTotals: Array<CartTotalObj>;
   cartProducts: Array<string>;
-  cartCosts: Array<string>;
+  cartCosts: Array<number>;
   cartStateChange: number;
 };
 
@@ -57,30 +57,33 @@ class Cart extends Component<CartProps, CartState> {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  
-
   increment = () => {
-    this.setState(
-      prevState => ({ cartStateChange: prevState.cartStateChange + 1 })
-    )
+    this.setState(prevState => ({
+      cartStateChange: prevState.cartStateChange + 1,
+    }));
   };
 
   //update totals
   //updateTotals() //params come from home component
 
   updateCartCost = () => {
-    return this.props.cart.map( (cartItem: CartObj) =>{
+    return this.props.cart.map((cartItem: CartObj) => {
       //prodCost.toFixed(2) - for 2 decimal points
-      const prodCost = (Math.round(cartItem.productCost * 100) / 100) + (Math.floor(cartItem.productCost * 100) /100);
-      this.setState({totalCost: prodCost})
-      console.log(this.state.totalCost)
-      return(
-        <div>
-          {this.state.totalCost}
-        </div>
-      )
-    })
-  }
+
+      this.state.cartCosts.push(cartItem.productCost);
+      const newNum = this.state.cartCosts.reduce((total, num) => {
+        return Math.floor(total * 100) / 100 + Math.floor(num * 100) / 100;
+      });
+      console.log('newNum===>', Math.floor(newNum * 100) / 100); //round to 2 decimal places
+      this.setState({ totalCost: Math.floor(newNum * 100) / 100 });
+      console.log(this.state.totalCost);
+      // return(
+      //   <div>
+      //     {this.state.totalCost}
+      //   </div>
+      // )
+    });
+  };
 
   // updateCartCost = () => {
   //   this.props.cart.map((cartItem: CartObj) => {
@@ -89,12 +92,6 @@ class Cart extends Component<CartProps, CartState> {
   // },}
 
   handleClick = (e: MouseEvent) => {
-    //update totals
-    // this.setState({order: {
-    //   totalCost: newCost,
-    //   totalItems: newItems,
-    // }})
-
     e.preventDefault();
     const url: string = `${APIURL}/orders/placeorder`;
     const bodyObj: BodyObj = {
@@ -115,12 +112,14 @@ class Cart extends Component<CartProps, CartState> {
       .then(res => res.json())
       .then(data => {
         // console.log('hello again mark');
-        console.log('data', data.order);
+        console.log('data - Order was placed ===>', data.order);
         //map through data
-        data.order.map((item: CartObj) => console.log(item))
-        console.log('something was added to the cart. CART');
-        this.increment();
-        console.log(this.props.cart);
+        // if (data.order.length === 0) {
+        //   data.order.map((item: CartObj) => console.log(item));
+        //   console.log('something was added to the cart. CART');
+        //   this.increment();
+        //   console.log(this.props.cart);
+        // }
 
         //do a map to add productName to the cartProductNames
         //in that same map add all cost to the cartProductCost
@@ -170,10 +169,12 @@ class Cart extends Component<CartProps, CartState> {
               <div>Cart is empty</div>
             )}
           </div>
-          <button onClick={this.updateCartCost}>click for cost
-          </button>
+          <button onClick={this.updateCartCost}>click for cost</button>
           <div>You have {this.props.cart.length} items in your cart</div>
-          <div>{this.state.totalCost} is the total cost of the items in your cart</div>
+          <div>You have {this.state.totalItems} items in your cart</div>
+          <div>
+            {this.state.totalCost} is the total cost of the items in your cart
+          </div>
         </div>
 
         <button onClick={this.handleClick}>Place Order</button>
