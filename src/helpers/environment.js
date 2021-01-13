@@ -5,7 +5,7 @@ switch (window.location.hostname) {
     APIURL = 'http://localhost:4040';
     break;
 
-  case 'wth-beeshop.herokuapp.com':
+  case 'beeshop-client.herokuapp.com':
     APIURL = 'https://wth-beeshop-server.herokuapp.com';
     break;
 

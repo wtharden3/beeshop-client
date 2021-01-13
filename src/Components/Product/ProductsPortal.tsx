@@ -110,10 +110,10 @@ class ProductsPortal extends Component<
         />
 
         {/**edit section */}
-        <Button type="primary">Edit</Button>
+        {/* <Button type="primary">Edit</Button> */}
        
         {/** delete section */}
-        <Button type="primary">Delete</Button>
+        {/* <Button type="primary">Delete</Button> */}
       </div>
     );
   }
