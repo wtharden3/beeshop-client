@@ -125,8 +125,6 @@ class Navbar extends Component<NavbarProps, NavbarState> {
       productTotal,
       viewCart,
       productCostTotal,
-      anchorEl,
-      mobileMoreAnchorEl,
     } = this.state;
     //props
     const { name, token, setToken } = this.props;

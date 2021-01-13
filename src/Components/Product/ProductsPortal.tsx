@@ -106,6 +106,7 @@ class ProductsPortal extends Component<
                 <ProductEdit id={product.id} token={this.props.token} />
                 <br />
                 <ProductDelete id={product.id} token={this.props.token}/>
+                <br />
                 <hr />
               </ul>
             ))
