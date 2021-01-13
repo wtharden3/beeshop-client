@@ -40,3 +40,10 @@
 ul.noDecor{
   list-style-type: none;
 }
+
+ul.flex-menu{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 0 20px;
+}

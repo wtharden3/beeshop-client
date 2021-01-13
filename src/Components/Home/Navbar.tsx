@@ -141,7 +141,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
 
         <Router>
           <div>
-            <ul>
+            <ul className="noDecor flex-menu" >
               <li>
                 <Link to="/">Home</Link>
               </li>
