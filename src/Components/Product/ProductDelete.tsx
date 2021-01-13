@@ -1,6 +1,7 @@
 import {Component, MouseEvent} from 'react';
 import { Button } from 'antd';
 import APIURL from '../../helpers/environment';
+import { DeleteOutlined } from '@ant-design/icons';
 
 type ProductDeleteProps = {
   token: string;
@@ -44,7 +45,7 @@ class ProductDelete extends Component<ProductDeleteProps, ProductDeleteState>{
     return(
       <div>
         <p>Delete this product</p>
-        <Button type="primary" onClick={this.handleDeleteBtn}>Delete</Button>
+        <Button type="primary" onClick={this.handleDeleteBtn}>Delete <span className="icons-list"><DeleteOutlined /></span></Button>
       </div>
     )
   }
