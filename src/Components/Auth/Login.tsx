@@ -15,7 +15,7 @@ type LoginState = {
 };
 
 class Login extends Component<LoginProps, LoginState> {
-  constructor(props: any) {
+  constructor(props: LoginProps) {
     super(props);
     this.state = {
       email: 'boss@email.com',

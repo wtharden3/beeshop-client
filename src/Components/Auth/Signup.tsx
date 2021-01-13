@@ -13,7 +13,7 @@ type SignUpProps = {
 
 }
 
-class Signup extends Component<{}, SignUpState> {
+class Signup extends Component<SignUpProps, SignUpState> {
   constructor(props: SignUpProps) {
     super(props);
     this.state = {
