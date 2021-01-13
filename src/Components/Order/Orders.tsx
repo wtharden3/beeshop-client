@@ -83,7 +83,7 @@ class Orders extends Component<OrdersProps, OrderState> {
           {/* <div>{orders.message}</div> */}
           <h3>Orders</h3>
           {/* <Cart token={this.state.token}/> */}
-          {orders.length
+          {orders
             ? orders.map(order => (
                 <div key={order.id}>
                   <p>Order ID: {order.id}</p>
