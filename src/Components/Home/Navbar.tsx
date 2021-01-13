@@ -5,6 +5,8 @@ import Home from './Home';
 import Cart from './Cart';
 import Orders from '../Order/Orders';
 import ProductsPortal from '../Product/ProductsPortal';
+import { Button } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 type NavbarProps = {
   token: string;
@@ -118,7 +120,14 @@ class Navbar extends Component<NavbarProps, NavbarState> {
 
   render() {
     //state
-    const { cart, productTotal, viewCart, productCostTotal, anchorEl, mobileMoreAnchorEl } = this.state;
+    const {
+      cart,
+      productTotal,
+      viewCart,
+      productCostTotal,
+      anchorEl,
+      mobileMoreAnchorEl,
+    } = this.state;
     //props
     const { name, token, setToken } = this.props;
 
@@ -146,9 +155,12 @@ class Navbar extends Component<NavbarProps, NavbarState> {
                 <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
-                <button onClick={this.toggleCart}>
-                  cart icon button to target view cart
-                </button>
+                <Button onClick={this.toggleCart}>
+                  shopping Cart{' '}
+                  <span className="icons-list">
+                    <ShoppingCartOutlined />
+                  </span>
+                </Button>
               </li>
               <li>Logout</li>
             </ul>
