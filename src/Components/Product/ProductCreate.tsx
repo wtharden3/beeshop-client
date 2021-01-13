@@ -1,5 +1,6 @@
 import { Component, FormEvent, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
+import { Button } from 'antd';
 
 type ProductCreateProps = {
   token: string;
@@ -188,11 +189,11 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             value={this.state.product.size}
             onChange={this.handleSizeChange}
           />
-          <button>Submit</button>
+          <Button type="primary" onClick={this.handleSubmit}>Submit</Button>
         </form>
-        <button onClick={this.props.getProducts}>
+        <Button  onClick={this.props.getProducts}>
           Show updated Product List
-        </button>
+        </Button>
       </div>
     );
   }
