@@ -1,6 +1,6 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import { Row, Col } from 'antd';
+import { Row, Col, Button } from 'antd';
 
 type HomeProps = {
   addToCartArr: (products: CartObj) => void;
@@ -149,13 +149,12 @@ class Home extends Component<HomeProps, Products> {
                     <li>{product.size}</li>
                     <li>{product.description}</li>
                     <li>{product.productCost}</li>
-                    <button
-                      color="primary"
+                    <Button type="primary"
                       onClick={this.addToCart}
                       className={`p-${product.id}`}
                     >
                       Add to cart
-                    </button>
+                    </Button>
                     {console.log(product)}
                     {/* when you click the button you will get store the product info in state and then send to order send to cart */}
                     <hr />

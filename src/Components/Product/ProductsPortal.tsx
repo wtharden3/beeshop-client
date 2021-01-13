@@ -104,6 +104,7 @@ class ProductsPortal extends Component<
                 <li>{product.size}</li>
                 <li>{product.description}</li>
                 <ProductEdit id={product.id} token={this.props.token} />
+                <br />
                 <ProductDelete id={product.id} token={this.props.token}/>
                 <hr />
               </ul>

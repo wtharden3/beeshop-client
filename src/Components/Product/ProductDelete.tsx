@@ -44,7 +44,6 @@ class ProductDelete extends Component<ProductDeleteProps, ProductDeleteState>{
   render(){
     return(
       <div>
-        <p>Delete this product</p>
         <Button type="primary" onClick={this.handleDeleteBtn}>Delete <span className="icons-list"><DeleteOutlined /></span></Button>
       </div>
     )

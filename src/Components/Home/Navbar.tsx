@@ -12,7 +12,7 @@ type NavbarProps = {
   token: string;
   name: string;
   setToken: (data: string, name: string) => void;
-  clearToken: (data: string) => void;
+  clearToken: () => void;
   // addToCart: (e: MouseEvent, arrayOfProducts: Array<CartArrayType>) => void;
 };
 
@@ -165,7 +165,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
                   </span>
                 </Button>
               </li>
-              <li>Logout</li>
+              <li><Button onClick={this.props.clearToken}>Logout</Button></li>
             </ul>
           </div>
 
