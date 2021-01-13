@@ -6,7 +6,7 @@ import Cart from './Cart';
 import Orders from '../Order/Orders';
 import ProductsPortal from '../Product/ProductsPortal';
 import { Button } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, LogoutOutlined } from '@ant-design/icons';
 
 type NavbarProps = {
   token: string;
@@ -165,7 +165,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
                   </span>
                 </Button>
               </li>
-              <li><Button onClick={this.props.clearToken}>Logout</Button></li>
+              <li><Button onClick={this.props.clearToken}>Logout <span className="icons-list"> <LogoutOutlined /></span></Button></li>
             </ul>
           </div>
 
