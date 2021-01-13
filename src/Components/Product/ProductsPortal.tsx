@@ -3,6 +3,7 @@ import ProductCreate from './ProductCreate';
 import ProductEdit from './ProductEdit';
 import APIURL from '../../helpers/environment';
 import { Button } from 'antd';
+import ProductDelete from './ProductDelete';
 
 type ProductsPortalProps = {
   token: string;
@@ -95,6 +96,7 @@ class ProductsPortal extends Component<
                 <li>{product.size}</li>
                 <li>{product.description}</li>
                 <ProductEdit id={product.id} token={this.props.token} />
+                <ProductDelete id={product.id} token={this.props.token}/>
                 <hr />
               </ul>
             ))
