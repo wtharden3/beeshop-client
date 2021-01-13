@@ -23,7 +23,7 @@ class Auth extends Component<AuthProps, AuthState> {
     //const token: React.ReactNode = this.props.children;
     return (
       <div>
-        <h1>Auth</h1>
+        <h1>Login / Sign up</h1>
         <h2>{this.state.holder}</h2>
         <br />
         <Signup />

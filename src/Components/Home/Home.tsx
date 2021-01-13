@@ -139,7 +139,7 @@ class Home extends Component<HomeProps, Products> {
           <Row>
               {this.state.productList ? (
                 this.state.productList.map(product => (
-            <Col span={12}>
+            <Col xs={24} sm={12}>
                   <ul className="noDecor" key={product.id}>
                     <li>
                       <h4>{product.productName}</h4>
