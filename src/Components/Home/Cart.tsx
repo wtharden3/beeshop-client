@@ -177,7 +177,7 @@ class Cart extends Component<CartProps, CartState> {
           </div>
         </div>
 
-        <button onClick={this.handleClick}>Place Order</button>
+        <button onClick={this.updateCartCost}>Place Order</button>
       </div>
     );
   }
