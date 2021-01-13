@@ -55,9 +55,9 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
     });
   };
 
-  handleEditSubmit = (e: FormEvent) => {
+  handleEditSubmit = (e: FormEvent): void => {
     e.preventDefault()
-    console.log('clicked from Order Edit. This is Ant design');
+    //console.log('clicked from Order Edit. This is Ant design');
     const orderid: number = this.state.orderid;
     const url: string = `${APIURL}/orders/edit/${orderid}`
     const bodyObj: OrderObj = {
@@ -96,7 +96,7 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
             value={this.state.order.totalCost}
             onChange={this.handleEditTotalCost}
           />
-        <Button type="primary">
+        <Button type="primary" onClick={this.handleEditSubmit}>
           Submit Edit
         </Button>
 

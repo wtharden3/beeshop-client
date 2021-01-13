@@ -25,7 +25,7 @@ class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState>{
     e.preventDefault()
     console.log('Delete this order')
     const orderid: number = this.state.orderid;
-    const url: string = `${APIURL}/products/delete/${orderid}`;
+    const url: string = `${APIURL}/orders/delete/${orderid}`;
 
     fetch(url, {
       method: 'DELETE',
