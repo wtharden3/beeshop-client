@@ -1,10 +1,12 @@
 import { Component, FormEvent } from 'react';
-import APIURL from '../../helpers/environment'
-import Button from '@material-ui/core/Button';
+import APIURL from '../../helpers/environment';
+// import Button from '@material-ui/core/Button';
+import { Alert } from 'antd';
+import { Button } from 'antd';
 
 type LoginProps = {
   setToken: (data: string, name: string) => void;
-}  
+};
 
 type LoginState = {
   // token: string;
@@ -22,8 +24,17 @@ class Login extends Component<LoginProps, LoginState> {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
+
+  showSuccessFeedback = () => {
+    return (
+      <Alert
+        message="Success Text"
+        description="You Successfully Logged in!"
+        type="success"
+      />
+    );
+  };
 
   handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -35,9 +46,9 @@ class Login extends Component<LoginProps, LoginState> {
     const url: string = `${APIURL}/user/login`;
     const bodyObj: object = {
       email,
-      password
-    }
-  console.log(this.props.setToken)
+      password,
+    };
+    console.log(this.props.setToken);
     fetch(url, {
       method: 'POST',
       headers: {
@@ -45,14 +56,16 @@ class Login extends Component<LoginProps, LoginState> {
       },
       body: JSON.stringify(bodyObj),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log('submit data', data)
-      console.log('data.user', data.user.firstName)
-      const name = `${data.user.firstName} ${data.user.lastName}`
-      this.props.setToken(data.sessionToken, name)
-    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('submit data', data);
+        console.log('data.user', data.user.firstName);
+        const name = `${data.user.firstName} ${data.user.lastName}`;
+        this.props.setToken(data.sessionToken, name);
+        this.showSuccessFeedback();
+      });
   };
+
 
   render() {
     // const token: React.ReactNode = this.props.children;
@@ -72,7 +85,7 @@ class Login extends Component<LoginProps, LoginState> {
             value={this.state.password}
             onChange={(e: any) => this.setState({ password: e.target.value })}
           />
-          <button>Login</button>
+          <Button type="primary" onClick={this.handleSubmit}>Login</Button>
         </form>
       </div>
     );
