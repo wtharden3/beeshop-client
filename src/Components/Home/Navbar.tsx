@@ -137,11 +137,14 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     // END MATERIAL UI
     return (
       <div>
-        <div>The Bee Lounge</div>
 
         <Router>
           <div>
             <ul className="noDecor flex-menu" >
+              <li>
+                <Link to="/"><h3>The Bee Lounge</h3></Link>
+              </li>
+        
               <li>
                 <Link to="/">Home</Link>
               </li>
