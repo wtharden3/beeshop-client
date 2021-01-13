@@ -167,7 +167,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
           </div>
 
           <div>
-            <p>{name ? <p>Hello, {name}!</p> : <p>Hello, guest!</p>}</p>
+            <h3>{name ? <p>Hello, {name}!</p> : <p>Hello, guest!</p>}</h3>
           </div>
 
           <div>
