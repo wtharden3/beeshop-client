@@ -3,6 +3,7 @@ import APIURL from '../../helpers/environment';
 import { Button } from 'antd';
 import OrderEdit from './OrderEdit';
 import OrderDelete from './OrderDelete';
+import { Row, Col } from 'antd';
 // import Cart from './Cart';
 
 type OrdersProps = {
@@ -83,8 +84,12 @@ class Orders extends Component<OrdersProps, OrderState> {
           {/* <div>{orders.message}</div> */}
           <h3>Orders</h3>
           {/* <Cart token={this.state.token}/> */}
+          <Row>
+
+
           {orders
             ? orders.map(order => (
+            <Col xs={24} sm={12}>
                 <div key={order.id}>
                   <p>Order ID: {order.id}</p>
                   <p>Total Cost: {order.totalCost}</p>
@@ -93,12 +98,16 @@ class Orders extends Component<OrdersProps, OrderState> {
                   <OrderDelete token={token} id={order.id}/>
                   <hr />
                 </div>
+            </Col>
               ))
             : null}
+
+
+          </Row>
         </div>
         {/* <OrderEdit token={token}/> */}
         {/* Edit*/}
-        <Button type="primary" onClick={this.handleEditClick}>Click Me</Button>
+        {/* <Button type="primary" onClick={this.handleEditClick}>Click Me Now</Button> */}
       </div>
     );
   }
