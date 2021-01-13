@@ -84,7 +84,7 @@ class ProductsPortal extends Component<
         <h1>{this.state.header}</h1>
         {/* display products*/}
         <div>
-          {this.state.productList.length > 0 ? (
+          {this.state.productList ? (
             this.state.productList.map(product => (
               <ul key={product.id}>
                 <li>

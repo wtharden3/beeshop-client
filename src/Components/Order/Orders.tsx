@@ -2,6 +2,7 @@ import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 import { Button } from 'antd';
 import OrderEdit from './OrderEdit';
+import OrderDelete from './OrderDelete';
 // import Cart from './Cart';
 
 type OrdersProps = {
@@ -63,6 +64,7 @@ class Orders extends Component<OrdersProps, OrderState> {
           <p>Order id: {order.id}</p>
           <p>Total Cost: {order.totalCost}</p>
           <p>Total Items: {order.totalItems}</p>
+          <OrderEdit token={this.props.token} id={order.id}/>
         </div>
       ) : (
         <div>
@@ -79,7 +81,7 @@ class Orders extends Component<OrdersProps, OrderState> {
       <div>
         <div>
           {/* <div>{orders.message}</div> */}
-          <p>{token}</p>
+          <h3>Orders</h3>
           {/* <Cart token={this.state.token}/> */}
           {orders.length
             ? orders.map(order => (
@@ -87,6 +89,8 @@ class Orders extends Component<OrdersProps, OrderState> {
                   <p>Order ID: {order.id}</p>
                   <p>Total Cost: {order.totalCost}</p>
                   <p>Total Items: {order.totalItems}</p>
+                  <OrderEdit token={token} id={order.id}/>
+                  <OrderDelete token={token} id={order.id}/>
                   <hr />
                 </div>
               ))
