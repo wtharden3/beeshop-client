@@ -1,5 +1,6 @@
 import { Component, FormEvent} from 'react';
 import APIURL from '../../helpers/environment';
+import { Button } from 'antd';
 
 type SignUpState = {
   firstName: string;
@@ -94,7 +95,7 @@ class Signup extends Component<SignUpProps, SignUpState> {
             value={this.state.userRole}
             onChange={(e) => this.setState({ userRole: e.target.value })}
           />
-          <button>Submit</button>
+          <Button type="primary" onClick={this.handleSubmit}>Submit</Button>
         </form>
       </div>
     );
