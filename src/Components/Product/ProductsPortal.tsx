@@ -83,6 +83,14 @@ class ProductsPortal extends Component<
       <div>
         <h1>{this.state.header}</h1>
         {/* display products*/}
+        <ProductCreate
+          getProducts={this.getProducts}
+          token={this.props.token}
+        />
+        <br />
+        <br />
+        <hr />
+        <h2>Current Products</h2>
         <div>
           {this.state.productList ? (
             this.state.productList.map(product => (
@@ -104,10 +112,6 @@ class ProductsPortal extends Component<
             <div>There are no products to display</div>
           )}
         </div>
-        <ProductCreate
-          getProducts={this.getProducts}
-          token={this.props.token}
-        />
 
         {/**edit section */}
         {/* <Button type="primary">Edit</Button> */}

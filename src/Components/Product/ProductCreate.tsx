@@ -150,7 +150,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
   render() {
     return (
       <div>
-        <h1>Add a Product</h1>
+        <h2>Add a Product</h2>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
