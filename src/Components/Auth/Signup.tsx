@@ -2,6 +2,7 @@ import { Component, FormEvent} from 'react';
 import APIURL from '../../helpers/environment';
 import { Button } from 'antd';
 
+
 type SignUpState = {
   firstName: string;
   lastName: string;

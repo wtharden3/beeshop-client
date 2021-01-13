@@ -1,6 +1,7 @@
 import {Component, MouseEvent} from 'react';
 import { Button } from 'antd';
 import APIURL from '../../helpers/environment';
+import { DeleteOutlined } from '@ant-design/icons';
 
 type OrderDeleteProps = {
   token: string;
@@ -43,7 +44,7 @@ class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState>{
     return(
       <div>
         <p>Delete this product</p>
-        <Button type="primary" onClick={this.handleDeleteBtn}>Delete</Button>
+        <Button type="primary" onClick={this.handleDeleteBtn}>Delete <span className="icons-list"><DeleteOutlined /></span></Button>
       </div>
     )
   }
