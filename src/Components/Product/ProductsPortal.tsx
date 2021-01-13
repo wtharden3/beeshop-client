@@ -86,7 +86,7 @@ class ProductsPortal extends Component<
         <div>
           {this.state.productList ? (
             this.state.productList.map(product => (
-              <ul key={product.id}>
+              <ul className="noDecor" key={product.id}>
                 <li>
                   <h4>{product.productName}</h4>
                 </li>
