@@ -1,8 +1,6 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { Row, Col } from 'antd';
 
 type HomeProps = {
   addToCartArr: (products: CartObj) => void;
@@ -91,7 +89,7 @@ class Home extends Component<HomeProps, Products> {
 
         console.log('this.state.product ', this.state.product);
         this.props.addToCartArr(this.state.product);
-        console.log('cartArr', this.props.cart)
+        console.log('cartArr', this.props.cart);
         // this.setState({ stateChange: this.state.stateChange + 1 });
       })
       .catch(err => console.log(err));
@@ -115,7 +113,6 @@ class Home extends Component<HomeProps, Products> {
   componentDidUpdate() {
     // console.log('from HOME productList---update', this.state.productList);
     // console.log('from HOME productList---update', this.state.productList[0]);
-
     // console.log('PROPS CART',this.props.cart);
     // const cartArr = this.props.cart;
     // cartArr.map(product => {
@@ -139,28 +136,36 @@ class Home extends Component<HomeProps, Products> {
         {/* <h2>{this.state.products.productName}</h2> */}
         <p>{this.state.message}</p>
         <div>
-          {this.state.productList ? (
-            this.state.productList.map(product => (
-              <ul key={product.id}>
-                <li>
-                  <h4>{product.productName}</h4>
-                </li>
-                <li>{product.category}</li>
-                <li>{product.subCategory}</li>
-                <li>{product.size}</li>
-                <li>{product.description}</li>
-                <li>{product.productCost}</li>
-                <button color="primary" onClick={this.addToCart} className={`p-${product.id}`}>
-                  Add to cart
-                </button>
-                {console.log(product)}
-                {/* when you click the button you will get store the product info in state and then send to order send to cart */}
-                <hr />
-              </ul>
-            ))
-          ) : (
-            <div></div>
-          )}
+          <Row>
+              {this.state.productList ? (
+                this.state.productList.map(product => (
+            <Col span={12}>
+                  <ul className="noDecor" key={product.id}>
+                    <li>
+                      <h4>{product.productName}</h4>
+                    </li>
+                    <li>{product.category}</li>
+                    <li>{product.subCategory}</li>
+                    <li>{product.size}</li>
+                    <li>{product.description}</li>
+                    <li>{product.productCost}</li>
+                    <button
+                      color="primary"
+                      onClick={this.addToCart}
+                      className={`p-${product.id}`}
+                    >
+                      Add to cart
+                    </button>
+                    {console.log(product)}
+                    {/* when you click the button you will get store the product info in state and then send to order send to cart */}
+                    <hr />
+                  </ul>
+            </Col>
+                ))
+              ) : (
+                <div></div>
+              )}
+          </Row>
         </div>
       </div>
     );
