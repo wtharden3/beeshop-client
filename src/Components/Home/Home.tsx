@@ -61,6 +61,7 @@ class Home extends Component<HomeProps, Products> {
     // this.displayProducts = this.displayProducts.bind(this)
   }
 
+//STEP 1
   addToCart = (e: MouseEvent): void => {
     e.preventDefault();
     //get the value of the className that contains the product id
@@ -114,7 +115,20 @@ class Home extends Component<HomeProps, Products> {
       });
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    // fetch(`${APIURL}/products/inventory`, {
+    //   method: 'GET',
+    //   headers: new Headers({
+    //     'Content-Type': 'application/json',
+    //   }),
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({ productList: data.products });
+    //     this.setState({ message: data.message });
+    //     //console.log('from HOME productList', this.state.productList);
+    //   });
+  }
 
   render() {
     return (
@@ -138,7 +152,7 @@ class Home extends Component<HomeProps, Products> {
                       <li>{product.subCategory}</li>
                       <li>{product.size}</li>
                       <li>{product.description}</li>
-                      <li>{product.productCost}</li>
+                      <li>Price: ${product.productCost}</li>
                       <Button
                         onClick={this.addToCart}
                         className={`p-${product.id}`}

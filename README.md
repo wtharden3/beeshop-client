@@ -4,6 +4,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This project was created utilizing, react (stateful components) and TypeScript. 
 
+## Admin Login
+The credentials to log in as an admin user is as follows:
+
+user: boss@email.com
+pass: pass
+
+## Admin Capabilities
+Access to Products Portal and all it's functionality
+
+Ability to view all orders of all users
+
 ## Available Scripts
 
 In the project directory, you can run:

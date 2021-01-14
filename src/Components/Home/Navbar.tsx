@@ -60,11 +60,14 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     this.setState({ viewCart: !this.state.viewCart });
   };
 
-  //this is passed on to HOMe
+  //this is passed on to 
   addToCartArr = (products: CartArrayType): void => {
+    //push products to the cart[] that were updated from HOME.TSX
     this.state.cart.push(products);
     console.log('from NAVBAR this.state.cart ===>', this.state.cart);
     //const cartArr = this.state.cart;
+    //map through the cart and add the PRODUCTNAME to the prodNames[] here
+    // and add PRODUCTCOST to the prodCost[] here
     this.state.cart.map(product => {
       this.state.prodNames.push(product.productName);
       this.state.prodCost.push(product.productCost);
@@ -75,7 +78,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     // this.setState({cart: arrayOfProducts})
   };
 
-  //this is passed on to HOMe
+  //this is passed on to HOMe - STEP 1
   updateTotals = (prodCost: number): void => {
     this.setState({ productCostTotal: prodCost.toString() });
   };
@@ -89,22 +92,22 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   // }
 
   //from MATERIAL UI
-  handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  // handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  //   this.setState({ anchorEl: event.currentTarget });
+  // };
 
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-    this.handleMobileMenuClose();
-  };
+  // handleMenuClose = () => {
+  //   this.setState({ anchorEl: null });
+  //   this.handleMobileMenuClose();
+  // };
 
-  handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    this.setState({ mobileMoreAnchorEl: event.currentTarget });
-  };
+  // handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  //   this.setState({ mobileMoreAnchorEl: event.currentTarget });
+  // };
 
-  handleMobileMenuClose = () => {
-    this.setState({ mobileMoreAnchorEl: null });
-  };
+  // handleMobileMenuClose = () => {
+  //   this.setState({ mobileMoreAnchorEl: null });
+  // };
   // END MATERIAL UI
 
   componentDidMount() {
@@ -198,7 +201,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               <Orders token={token} />
             </Route>
             <Route exact path="/dashboard">
-              {isAdmin ? (<ProductsPortal showForAdmin={showForAdmin} token={token} />):(<div><h2>Not Authorized</h2><p>If you are and admin, please log on with your credentials to gain access.</p></div>)}
+              {isAdmin ? (<ProductsPortal showForAdmin={showForAdmin} token={token} />):(<div><h2>Not Authorized</h2><p>If you are an admin, please log on with your credentials to gain access.</p></div>)}
               {/* <ProductsPortal showForAdmin={showForAdmin} token={token} /> */}
             </Route>
           </Switch>

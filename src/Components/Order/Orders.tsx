@@ -18,6 +18,8 @@ type OrderObj = {
   id: number;
   totalCost: string;
   totalItems: string;
+  details: string;
+  shippingInfo: string;
 };
 
 class Orders extends Component<OrdersProps, OrderState> {
@@ -33,9 +35,8 @@ class Orders extends Component<OrdersProps, OrderState> {
 
   // }
   handleEditClick = (e: MouseEvent) => {
-    console.log('clicked from Order Edit. This is Ant design')
-  }
-
+    console.log('clicked from Order Edit. This is Ant design');
+  };
 
   componentDidMount() {
     fetch(`${APIURL}/orders/list`, {
@@ -64,7 +65,9 @@ class Orders extends Component<OrdersProps, OrderState> {
           <p>Order id: {order.id}</p>
           <p>Total Cost: {order.totalCost}</p>
           <p>Total Items: {order.totalItems}</p>
-          <OrderEdit token={this.props.token} id={order.id}/>
+          <p>Details: {order.details}</p>
+          <p>shippingInfo: {order.shippingInfo}</p>
+          <OrderEdit token={this.props.token} id={order.id} />
         </div>
       ) : (
         <div>
@@ -84,24 +87,22 @@ class Orders extends Component<OrdersProps, OrderState> {
           <h3>Orders</h3>
           {/* <Cart token={this.state.token}/> */}
           <Row>
-
-
-          {orders
-            ? orders.map(order => (
-            <Col xs={24} sm={12}>
-                <div key={order.id}>
-                  <p>Order ID: {order.id}</p>
-                  <p>Total Cost: {order.totalCost}</p>
-                  <p>Total Items: {order.totalItems}</p>
-                  <OrderEdit token={token} id={order.id}/>
-                  <OrderDelete token={token} id={order.id}/>
-                  <hr />
-                </div>
-            </Col>
-              ))
-            : null}
-
-
+            {orders
+              ? orders.map(order => (
+                  <Col xs={24} sm={12}>
+                    <div key={order.id}>
+                      <p>Order ID: {order.id}</p>
+                      <p>Total Cost: {order.totalCost}</p>
+                      <p>Total Items: {order.totalItems}</p>
+                      <p>Details: {order.details}</p>
+                      <p>shippingInfo: {order.shippingInfo}</p>
+                      <OrderEdit token={token} id={order.id} />
+                      <OrderDelete token={token} id={order.id} />
+                      <hr />
+                    </div>
+                  </Col>
+                ))
+              : null}
           </Row>
         </div>
         {/* <OrderEdit token={token}/> */}

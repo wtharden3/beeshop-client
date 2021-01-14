@@ -3,8 +3,6 @@ import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
   token: string;
-  // disPlayCartItems: () => void;
-  //below are brought in from NavBar
   productTotal: string;
   productCostTotal: string;
   cart: Array<CartObj>;
@@ -38,6 +36,9 @@ type BodyObj = {
   order: {
     totalCost: number;
     totalItems: number;
+    //need to update with additional values from order
+    details: string;
+    shippingInfo: string;
   };
 };
 
@@ -66,6 +67,7 @@ class Cart extends Component<CartProps, CartState> {
   //update totals
   //updateTotals() //params come from home component
 
+//understand this
   updateCartCost = () => {
     return this.props.cart.map((cartItem: CartObj) => {
       //prodCost.toFixed(2) - for 2 decimal points
@@ -77,6 +79,7 @@ class Cart extends Component<CartProps, CartState> {
       console.log('newNum===>', Math.floor(newNum * 100) / 100); //round to 2 decimal places
       this.setState({ totalCost: Math.floor(newNum * 100) / 100 });
       console.log(this.state.totalCost);
+
       // return(
       //   <div>
       //     {this.state.totalCost}
@@ -98,6 +101,9 @@ class Cart extends Component<CartProps, CartState> {
       order: {
         totalCost: this.state.totalCost,
         totalItems: this.state.totalItems,
+//need to update with additional values from order
+        details: `Your order was placed on today (find date)`,
+        shippingInfo: 'has not shipped yet'
       },
     };
 
@@ -133,15 +139,7 @@ class Cart extends Component<CartProps, CartState> {
   };
 
   componentDidUpdate() {
-    // when this.state.cart
-    // console.log('now I want to return the cart mapper. We are on CART');
-    // this.props.cart.map((item: CartObj, index: number) => (
-    //   <ul key={index}>
-    //     <li>{item.productName}</li>
-    //     <li>{item.productQuantity}</li>
-    //     <li>{item.productCost}</li>
-    //   </ul>
-    // ));
+    //fetch orders again?
   }
 
   render() {
@@ -177,7 +175,7 @@ class Cart extends Component<CartProps, CartState> {
           </div>
         </div>
 
-        <button onClick={this.updateCartCost}>Place Order</button>
+        <button onClick={this.handleClick}>Place Order</button>
       </div>
     );
   }
