@@ -1,8 +1,8 @@
-import { Component, FormEvent } from 'react';
+import { Component } from 'react';
 import APIURL from '../../helpers/environment';
 // import Button from '@material-ui/core/Button';
 // import { Alert } from 'antd';
-import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col } from 'antd';
 
 type LoginProps = {
   setToken: (data: string, name: string) => void;

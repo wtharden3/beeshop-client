@@ -1,6 +1,5 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import { Button } from 'antd';
 import OrderEdit from './OrderEdit';
 import OrderDelete from './OrderDelete';
 import { Row, Col } from 'antd';

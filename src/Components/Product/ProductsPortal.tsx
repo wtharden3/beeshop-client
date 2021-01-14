@@ -2,7 +2,6 @@ import { Component, MouseEvent } from 'react';
 import ProductCreate from './ProductCreate';
 import ProductEdit from './ProductEdit';
 import APIURL from '../../helpers/environment';
-import { Button } from 'antd';
 import ProductDelete from './ProductDelete';
 
 type ProductsPortalProps = {

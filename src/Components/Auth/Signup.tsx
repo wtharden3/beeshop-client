@@ -1,4 +1,4 @@
-import { Component, FormEvent } from 'react';
+import { Component } from 'react';
 import APIURL from '../../helpers/environment';
 import { Row, Col, Form, Input, Button } from 'antd';
 

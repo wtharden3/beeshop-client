@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Login from './Login';
 import Signup from './Signup';
-import { Row, Col, Tabs } from 'antd';
+import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 

@@ -1,4 +1,4 @@
-import { Component, MouseEvent, DetailedHTMLProps } from 'react';
+import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
 type CartProps = {
