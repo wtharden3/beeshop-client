@@ -13,6 +13,8 @@ type NavbarProps = {
   name: string;
   setToken: (data: string, name: string) => void;
   clearToken: () => void;
+  showForAdmin: (userRole: string) => void;
+  isAdmin: boolean;
   // addToCart: (e: MouseEvent, arrayOfProducts: Array<CartArrayType>) => void;
 };
 
@@ -106,23 +108,17 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   // END MATERIAL UI
 
   componentDidMount() {
-    //console.log('cart[]', this.state.cart);
   }
 
   //when the compenent is changed
   componentDidUpdate() {
-    // console.log('cart[]', this.state.cart);
-    // console.log(
-    //   'this is on Navbar.tsx. When button to display Cart is clicked "viewCart" state is changed making it so componentWillUpdate is updated'
-    // );
-    // console.log('from NAVBAR this.state.cart ===>', this.state.cart)
   }
 
   render() {
     //state
     const { cart, productTotal, viewCart, productCostTotal } = this.state;
     //props
-    const { name, token, setToken } = this.props;
+    const { name, token, setToken, showForAdmin, isAdmin } = this.props;
 
     //FROM MATERIAL UI
     // const isMenuOpen = Boolean(anchorEl);
@@ -153,7 +149,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               </li>
               <li>
                 <Button onClick={this.toggleCart}>
-                  shopping Cart{' '}
+              
                   <span className="icons-list">
                     <ShoppingCartOutlined />
                   </span>
@@ -196,13 +192,14 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               />
             </Route>
             <Route exact path="/login">
-              <Auth setToken={setToken} />
+              <Auth showForAdmin={showForAdmin} setToken={setToken} />
             </Route>
             <Route exact path="/orders">
               <Orders token={token} />
             </Route>
             <Route exact path="/dashboard">
-              <ProductsPortal token={token} />
+              {isAdmin ? (<ProductsPortal showForAdmin={showForAdmin} token={token} />):(<div><h2>Not Authorized</h2><p>If you are and admin, please log on with your credentials to gain access.</p></div>)}
+              {/* <ProductsPortal showForAdmin={showForAdmin} token={token} /> */}
             </Route>
           </Switch>
         </Router>

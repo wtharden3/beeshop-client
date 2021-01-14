@@ -7,6 +7,7 @@ const { TabPane } = Tabs;
 
 type AuthProps = {
   setToken: (data: string, name: string) => void;
+  showForAdmin: (userRole: string) => void;
 };
 
 type AuthState = {
@@ -24,6 +25,7 @@ class Auth extends Component<AuthProps, AuthState> {
   render() {
     //const tokenProps = {token: this.state.token}
     //const token: React.ReactNode = this.props.children;
+    const {showForAdmin, setToken} = this.props;
     return (
       <div style={{marginLeft: '20px', marginRight: '20px'}}>
         {/* <h1>Login / Sign up</h1> */}
@@ -31,7 +33,7 @@ class Auth extends Component<AuthProps, AuthState> {
 
         <Tabs defaultActiveKey="1">
           <TabPane tab="Login" key="1">
-            <Login setToken={this.props.setToken} /> {/* {...tokenProps}*/}
+            <Login showForAdmin={showForAdmin} setToken={setToken} /> {/* {...tokenProps}*/}
           </TabPane>
 
           <TabPane tab="Signup" key="2">

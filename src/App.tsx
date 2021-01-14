@@ -7,6 +7,7 @@ import Navbar from './Components/Home/Navbar';
 type AppState = {
   token: string; //took out | undefined;
   name: string;
+  isAdmin: boolean;
 };
 
 type AppProps = {
@@ -18,7 +19,8 @@ class App extends Component<AppProps, AppState> {
     super(props);
     this.state = {
       token: '',
-      name: ''
+      name: '',
+      isAdmin: false
     };
 
     //  this.setToken = this.setToken.bind(this);
@@ -40,11 +42,19 @@ class App extends Component<AppProps, AppState> {
     console.log('cleartoken', localToken);
   };
 
+  showForAdmin = (userRole: string) => {
+    if(userRole === 'admin'){
+      this.setState({isAdmin: true})
+    } else {
+      this.setState({isAdmin: false})
+    }
+  } 
+
   render() {
     //state - so we don't have to keep typing 'this.state.token' for  example
-    const {token, name } = this.state;
+    const {token, name, isAdmin } = this.state;
     //props - methods
-    const {setToken, clearToken} = this;
+    const {setToken, clearToken, showForAdmin} = this;
     return (
       <div className="App">
         
@@ -53,6 +63,8 @@ class App extends Component<AppProps, AppState> {
           name={name}
           setToken={setToken}
           clearToken={clearToken}
+          showForAdmin={showForAdmin}
+          isAdmin={isAdmin}
         />
       </div>
     );

@@ -6,6 +6,7 @@ import ProductDelete from './ProductDelete';
 
 type ProductsPortalProps = {
   token: string;
+  showForAdmin: (userRole: string) => void;
 };
 
 type ProductsPortalPortState = {

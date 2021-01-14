@@ -6,6 +6,7 @@ import { message, Form, Input, Button, Row, Col } from 'antd';
 
 type LoginProps = {
   setToken: (data: string, name: string) => void;
+  showForAdmin: (userRole: string) => void;
 };
 
 type LoginState = {
@@ -72,6 +73,8 @@ class Login extends Component<LoginProps, LoginState> {
       .then(data => {
         console.log('submit data', data);
         console.log('data.user', data.user.firstName);
+        console.log('data.user.userRole', data.user.userRole);
+        this.props.showForAdmin(data.user.userRole)
         const name = `${data.user.firstName} ${data.user.lastName}`;
         this.props.setToken(data.sessionToken, name);
         this.success();
