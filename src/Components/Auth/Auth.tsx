@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import Login from './Login';
 import Signup from './Signup';
-import { Row, Col } from 'antd';
+import { Row, Col, Tabs } from 'antd';
+
+const { TabPane } = Tabs;
 
 type AuthProps = {
   setToken: (data: string, name: string) => void;
@@ -26,17 +28,16 @@ class Auth extends Component<AuthProps, AuthState> {
       <div>
         <h1>Login / Sign up</h1>
         {/* <h2>{this.state.holder}</h2> */}
-        <Row
-          style={{ marginLeft: '20px', marginRight: '20px' }}
-          justify="space-around"
-        >
-          <Col xs={24} sm={12}>
+
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Signup" key="1">
             <Signup />
-          </Col>
-          <Col xs={24} sm={12}>
+          </TabPane>
+
+          <TabPane tab="Login" key="2">
             <Login setToken={this.props.setToken} /> {/* {...tokenProps}*/}
-          </Col>
-        </Row>
+          </TabPane>
+        </Tabs>
       </div>
     );
   }
