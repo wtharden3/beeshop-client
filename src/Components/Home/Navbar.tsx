@@ -6,7 +6,7 @@ import Cart from './Cart';
 import Orders from '../Order/Orders';
 import ProductsPortal from '../Product/ProductsPortal';
 import { ShoppingCartOutlined, LogoutOutlined } from '@ant-design/icons';
-import {Button} from 'antd';
+import { Button } from 'antd';
 
 type NavbarProps = {
   token: string;
@@ -120,12 +120,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
 
   render() {
     //state
-    const {
-      cart,
-      productTotal,
-      viewCart,
-      productCostTotal,
-    } = this.state;
+    const { cart, productTotal, viewCart, productCostTotal } = this.state;
     //props
     const { name, token, setToken } = this.props;
 
@@ -135,14 +130,15 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     // END MATERIAL UI
     return (
       <div>
-
         <Router>
           <div>
-            <ul className="noDecor flex-menu" >
+            <ul className="noDecor flex-menu">
               <li>
-                <Link to="/"><h3>The Bee Lounge</h3></Link>
+                <Link to="/">
+                  <h3>The Bee Lounge</h3>
+                </Link>
               </li>
-        
+
               <li>
                 <Link to="/">Home</Link>
               </li>
@@ -163,7 +159,15 @@ class Navbar extends Component<NavbarProps, NavbarState> {
                   </span>
                 </Button>
               </li>
-              <li><Button onClick={this.props.clearToken}>Logout <span className="icons-list"> <LogoutOutlined /></span></Button></li>
+              <li>
+                <Button onClick={this.props.clearToken}>
+                  Logout{' '}
+                  <span className="icons-list">
+                    {' '}
+                    <LogoutOutlined />
+                  </span>
+                </Button>
+              </li>
             </ul>
           </div>
 

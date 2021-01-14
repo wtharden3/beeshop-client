@@ -1,6 +1,8 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Card } from 'antd';
+
+const { Meta } = Card;
 
 type HomeProps = {
   addToCartArr: (products: CartObj) => void;
@@ -63,7 +65,7 @@ class Home extends Component<HomeProps, Products> {
     e.preventDefault();
     //get the value of the className that contains the product id
     const classValue = e.currentTarget.classList.value;
-    console.log('classValue===>', classValue)
+    console.log('classValue===>', classValue);
     //turns the string into and array based on spaces
     const idNumArr = classValue.split('');
     //idNum.splice(0,2) removes 'p-'
@@ -71,7 +73,7 @@ class Home extends Component<HomeProps, Products> {
     //that leaves idNum => which just leavs the id number
     //now I need to join the array to become a string again
     const idNum = idNumArr.join('');
-    console.log(idNum)
+    console.log(idNum);
     //fetch using idNum for :productid
     fetch(`${APIURL}/products/${idNum}`, {
       method: 'GET',
@@ -112,46 +114,46 @@ class Home extends Component<HomeProps, Products> {
       });
   }
 
-  componentDidUpdate() {
-    
-  }
+  componentDidUpdate() {}
 
   render() {
     return (
       <div>
-        Home
-        <h1>Home Page!</h1>
+        <Card>
+          <h2>Featured Products</h2>
+        </Card>
         {/* <h2>{this.state.products.productName}</h2> */}
-        <p>{this.state.message}</p>
+        {/* <p>{this.state.message}</p> */}
         <div>
           <Row>
-              {this.state.productList ? (
-                this.state.productList.map(product => (
-            <Col xs={24} sm={12}>
-                  <ul className="noDecor" key={product.id}>
-                    <li>
-                      <h4>{product.productName}</h4>
-                    </li>
-                    <li>{product.category}</li>
-                    <li>{product.subCategory}</li>
-                    <li>{product.size}</li>
-                    <li>{product.description}</li>
-                    <li>{product.productCost}</li>
-                    <Button
-                      onClick={this.addToCart}
-                      className={`p-${product.id}`}
-                    >
-                      Add to cart
-                    </Button>
-                    {console.log(product)}
-                    {/* when you click the button you will get store the product info in state and then send to order send to cart */}
-                    <hr />
-                  </ul>
-            </Col>
-                ))
-              ) : (
-                <div></div>
-              )}
+            {this.state.productList ? (
+              this.state.productList.map(product => (
+                <Col xs={24} sm={12}>
+                  <Card hoverable>
+                    <ul className="noDecor" key={product.id}>
+                      <li>
+                        <h4>{product.productName}</h4>
+                      </li>
+                      <li>{product.category}</li>
+                      <li>{product.subCategory}</li>
+                      <li>{product.size}</li>
+                      <li>{product.description}</li>
+                      <li>{product.productCost}</li>
+                      <Button
+                        onClick={this.addToCart}
+                        className={`p-${product.id}`}
+                      >
+                        Add to cart
+                      </Button>
+                      {console.log(product)}
+                      {/* when you click the button you will get store the product info in state and then send to order send to cart */}
+                    </ul>
+                  </Card>
+                </Col>
+              ))
+            ) : (
+              <div></div>
+            )}
           </Row>
         </div>
       </div>

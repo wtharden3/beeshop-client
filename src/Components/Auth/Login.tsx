@@ -2,7 +2,7 @@ import { Component } from 'react';
 import APIURL from '../../helpers/environment';
 // import Button from '@material-ui/core/Button';
 // import { Alert } from 'antd';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { message, Form, Input, Button, Row, Col } from 'antd';
 
 type LoginProps = {
   setToken: (data: string, name: string) => void;
@@ -25,6 +25,18 @@ class Login extends Component<LoginProps, LoginState> {
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  success = () => {
+    message.success('You have successfully Logged in');
+  };
+
+  error = () => {
+    message.error('Please try again');
+  };
+
+  warning = () => {
+    message.warning('This is a warning message');
+  };
 
   showSuccessFeedback = () => {
     // return (
@@ -62,8 +74,12 @@ class Login extends Component<LoginProps, LoginState> {
         console.log('data.user', data.user.firstName);
         const name = `${data.user.firstName} ${data.user.lastName}`;
         this.props.setToken(data.sessionToken, name);
-        this.showSuccessFeedback();
-      });
+        this.success();
+      })
+      .catch(err => {
+        console.log(err);
+        this.error();
+      })
   };
 
   render() {
@@ -71,7 +87,7 @@ class Login extends Component<LoginProps, LoginState> {
     return (
       <div>
         <h2>Login</h2>
-        <Form onFinish={this.handleSubmit}>
+        <Form initialValues={{ remember: true }} onFinish={this.handleSubmit} onFinishFailed={this.error}>
           <Row
             style={{ marginLeft: '20px', marginRight: '20px' }}
             justify="space-around"
@@ -115,9 +131,7 @@ class Login extends Component<LoginProps, LoginState> {
             </Col>
             <Col span={24}>
               <Form.Item>
-                <Button type="primary">
-                  Login
-                </Button>
+                <Button type="primary" onClick={this.handleSubmit}>Login</Button>
               </Form.Item>
             </Col>
           </Row>

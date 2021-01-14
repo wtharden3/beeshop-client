@@ -25,17 +25,17 @@ class Auth extends Component<AuthProps, AuthState> {
     //const tokenProps = {token: this.state.token}
     //const token: React.ReactNode = this.props.children;
     return (
-      <div>
-        <h1>Login / Sign up</h1>
+      <div style={{marginLeft: '20px', marginRight: '20px'}}>
+        {/* <h1>Login / Sign up</h1> */}
         {/* <h2>{this.state.holder}</h2> */}
 
         <Tabs defaultActiveKey="1">
-          <TabPane tab="Signup" key="1">
-            <Signup />
+          <TabPane tab="Login" key="1">
+            <Login setToken={this.props.setToken} /> {/* {...tokenProps}*/}
           </TabPane>
 
-          <TabPane tab="Login" key="2">
-            <Login setToken={this.props.setToken} /> {/* {...tokenProps}*/}
+          <TabPane tab="Signup" key="2">
+            <Signup />
           </TabPane>
         </Tabs>
       </div>
