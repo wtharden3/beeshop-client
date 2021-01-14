@@ -2,8 +2,7 @@ import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment';
 // import Button from '@material-ui/core/Button';
 // import { Alert } from 'antd';
-import { Form, Input, Button, Checkbox } from 'antd';
-
+import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 
 type LoginProps = {
   setToken: (data: string, name: string) => void;
@@ -37,8 +36,8 @@ class Login extends Component<LoginProps, LoginState> {
     // );
   };
 
-  handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  handleSubmit = () => {
+    //e.preventDefault();
     console.log('handled it', this.state.email);
 
     const email: string = this.state.email;
@@ -67,27 +66,62 @@ class Login extends Component<LoginProps, LoginState> {
       });
   };
 
-
   render() {
     // const token: React.ReactNode = this.props.children;
     return (
       <div>
         <h2>Login</h2>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            placeholder="email"
-            value={this.state.email}
-            onChange={(e: any) => this.setState({ email: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={this.state.password}
-            onChange={(e: any) => this.setState({ password: e.target.value })}
-          />
-          <Button type="primary" onClick={this.handleSubmit}>Login</Button>
-        </form>
+        <Form onFinish={this.handleSubmit}>
+          <Row
+            style={{ marginLeft: '20px', marginRight: '20px' }}
+            justify="space-around"
+          >
+            <Col xs={24}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[{ required: true, message: 'Please input your email' }]}
+              >
+                <Input
+                  type="email"
+                  placeholder="email"
+                  value={this.state.email}
+                  onChange={(e: any) =>
+                    this.setState({ email: e.target.value })
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24}>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter your password!',
+                  },
+                ]}
+              >
+                <Input
+                  type="password"
+                  placeholder="password"
+                  value={this.state.password}
+                  onChange={(e: any) =>
+                    this.setState({ password: e.target.value })
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item>
+                <Button type="primary">
+                  Login
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
       </div>
     );
   }
