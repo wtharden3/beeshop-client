@@ -159,7 +159,7 @@ class Cart extends Component<CartProps, CartState> {
           <div>
             {this.props.cart.length > 0 ? (
               this.props.cart.map((item: CartObj, index: number) => (
-                <ul key={index}>
+                <ul className="noDecor" key={index}>
                   <li>{item.productName}</li>
                   <li>{item.productQuantity}</li>
                   <li>{item.productCost}</li>

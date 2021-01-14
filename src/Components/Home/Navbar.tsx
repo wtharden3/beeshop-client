@@ -5,8 +5,8 @@ import Home from './Home';
 import Cart from './Cart';
 import Orders from '../Order/Orders';
 import ProductsPortal from '../Product/ProductsPortal';
-import { Button } from 'antd';
 import { ShoppingCartOutlined, LogoutOutlined } from '@ant-design/icons';
+import {Button} from 'antd';
 
 type NavbarProps = {
   token: string;

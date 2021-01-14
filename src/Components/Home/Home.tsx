@@ -113,21 +113,7 @@ class Home extends Component<HomeProps, Products> {
   }
 
   componentDidUpdate() {
-    // console.log('from HOME productList---update', this.state.productList);
-    // console.log('from HOME productList---update', this.state.productList[0]);
-    // console.log('PROPS CART',this.props.cart);
-    // const cartArr = this.props.cart;
-    // cartArr.map(product => {
-    //   this.state.productNames.push(product.productName);
-    //   this.state.productCosts.push(product.productCost); //already a number
-    // });
-    // //push product.productName into array productNames
-    // //push product.productCost into array productCosts
-    // console.log('productNames Array===>', this.state.productNames);
-    // console.log('productNames.lengths Array===>', this.state.productNames);
-    // console.log('productCosts Array===>', this.state.productCosts);
-    // //this.setState({})
-    // console.log('there was a change on the Home page');
+    
   }
 
   render() {
