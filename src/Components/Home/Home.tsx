@@ -63,13 +63,15 @@ class Home extends Component<HomeProps, Products> {
     e.preventDefault();
     //get the value of the className that contains the product id
     const classValue = e.currentTarget.classList.value;
+    console.log('classValue===>', classValue)
     //turns the string into and array based on spaces
     const idNumArr = classValue.split('');
     //idNum.splice(0,2) removes 'p-'
-    idNumArr.splice(0, 2);
+    idNumArr.splice(0, 10);
     //that leaves idNum => which just leavs the id number
     //now I need to join the array to become a string again
-    const idNum = idNumArr.toString();
+    const idNum = idNumArr.join('');
+    console.log(idNum)
     //fetch using idNum for :productid
     fetch(`${APIURL}/products/${idNum}`, {
       method: 'GET',
@@ -149,12 +151,12 @@ class Home extends Component<HomeProps, Products> {
                     <li>{product.size}</li>
                     <li>{product.description}</li>
                     <li>{product.productCost}</li>
-                    <button
+                    <Button
                       onClick={this.addToCart}
                       className={`p-${product.id}`}
                     >
                       Add to cart
-                    </button>
+                    </Button>
                     {console.log(product)}
                     {/* when you click the button you will get store the product info in state and then send to order send to cart */}
                     <hr />
