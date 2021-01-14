@@ -79,7 +79,7 @@ class Login extends Component<LoginProps, LoginState> {
             <Col xs={24}>
               <Form.Item
                 label="Email"
-                name="email"
+                name="loginEmail"
                 rules={[{ required: true, message: 'Please input your email' }]}
               >
                 <Input
@@ -95,7 +95,7 @@ class Login extends Component<LoginProps, LoginState> {
             <Col xs={24}>
               <Form.Item
                 label="Password"
-                name="password"
+                name="loginPassword"
                 rules={[
                   {
                     required: true,

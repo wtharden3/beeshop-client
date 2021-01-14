@@ -1,6 +1,6 @@
 import { Component, FormEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import { Row, Col, Form, Input, Button, Checkbox } from 'antd';
+import { Row, Col, Form, Input, Button } from 'antd';
 
 type SignUpState = {
   firstName: string;
@@ -64,13 +64,13 @@ class Signup extends Component<SignUpProps, SignUpState> {
   render() {
     return (
       <div>
-        <h1>Signup</h1>
+        <h2>Signup</h2>
         <Form onFinish={this.handleSubmit}>
           <Row
             style={{ marginLeft: '20px', marginRight: '20px' }}
             justify="space-around"
           >
-            <Col xs={24} sm={12}>
+            <Col span={24}>
               <Form.Item
                 label="First Name"
                 name="firstName"
@@ -88,7 +88,7 @@ class Signup extends Component<SignUpProps, SignUpState> {
                 />
               </Form.Item>
             </Col>
-            <Col xs={12}>
+            <Col span={24}>
               <Form.Item
                 label="Last Name"
                 name="lastName"
@@ -106,10 +106,10 @@ class Signup extends Component<SignUpProps, SignUpState> {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={12}>
+            <Col span={24}>
               <Form.Item
                 label="Email"
-                name="email"
+                name="signupEmail"
                 rules={[
                   {
                     required: true,
@@ -125,10 +125,10 @@ class Signup extends Component<SignUpProps, SignUpState> {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={12}>
+            <Col span={24}>
               <Form.Item
                 label="Password"
-                name="password"
+                name="signupPassword"
                 rules={[
                   {
                     required: true,
@@ -145,7 +145,7 @@ class Signup extends Component<SignUpProps, SignUpState> {
               </Form.Item>
             </Col>
 
-            <Form.Item
+            {/* <Form.Item
               label="Admin Password"
               name="userRole"
               rules={[
@@ -161,7 +161,7 @@ class Signup extends Component<SignUpProps, SignUpState> {
                 value={this.state.userRole}
                 onChange={e => this.setState({ userRole: e.target.value })}
               />
-            </Form.Item>
+            </Form.Item> */}
             <Col span={24}>
               <Form.Item>
                 <Button type="primary" htmlType="submit">
