@@ -184,6 +184,14 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             </Col>
             <Col span={24}>
               <Form.Item label="Product Category" name="createCategory">
+                <Select defaultValue="tops" onChange={this.handleCategoryChange}>
+                  <Option value="tops">tops</Option>
+                  <Option value="bottoms">bottoms</Option>
+                  <Option value="accessories">accessories</Option>
+                  <Option value="footwear">footwear</Option>
+                  <Option value="sleepwear">sleepwear</Option>
+                  <Option value="intimates">intimates</Option>
+                </Select>
                 {/* <Input
                   type="text"
                   placeholder="Product Category"
