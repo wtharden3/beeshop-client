@@ -5,6 +5,13 @@ import { Button } from 'antd';
 type ProductEditProps = {
   token: string;
   id: number;
+  productCost: string;
+  productName: string;
+  description: string;
+    category: string;
+    subCategory: string;
+    // id: number;
+    size: string;
 };
 
 type ProductEditState = {
@@ -41,13 +48,13 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
     this.state = {
       productid: this.props.id,
       product: {
-        productName: '',
-        productCost: '',
-        description: '',
-        category: '',
-        subCategory: '',
+        productName: this.props.productName,
+        productCost: this.props.productCost,
+        description: this.props.description,
+        category: this.props.category,
+        subCategory: this.props.subCategory,
         // id: 0,
-        size: '',
+        size: this.props.size,
       },
     };
   }

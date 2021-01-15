@@ -77,7 +77,6 @@ class ProductsPortal extends Component<
 
   //edit fNs
 
-
   render() {
     return (
       <div>
@@ -104,9 +103,18 @@ class ProductsPortal extends Component<
                 <li>{product.subCategory}</li>
                 <li>{product.size}</li>
                 <li>{product.description}</li>
-                <ProductEdit id={product.id} token={this.props.token} />
+                <ProductEdit
+                  size={product.size}
+                  subCategory={product.subCategory}
+                  category={product.category}
+                  description={product.description}
+                  productName={product.productName}
+                  productCost={product.productCost}
+                  id={product.id}
+                  token={this.props.token}
+                />
                 <br />
-                <ProductDelete id={product.id} token={this.props.token}/>
+                <ProductDelete id={product.id} token={this.props.token} />
                 <br />
                 <hr />
               </ul>
@@ -118,7 +126,7 @@ class ProductsPortal extends Component<
 
         {/**edit section */}
         {/* <Button type="primary">Edit</Button> */}
-       
+
         {/** delete section */}
         {/* <Button type="primary">Delete</Button> */}
       </div>

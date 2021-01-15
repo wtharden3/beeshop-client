@@ -121,7 +121,8 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
 
   handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
-    this.props.getProducts(e);
+    // this.props.getProducts(e);
+    //this.props.getProducts()
     const url: string = `${APIURL}/products/addtoinventory`;
     const bodyObj: ProductCreateState = {
       product: {
