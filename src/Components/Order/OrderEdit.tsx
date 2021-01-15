@@ -96,8 +96,12 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
       .then(data => {
         console.log(data);
         this.props.getAllOrders();
+        this.success()
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        this.error()
+        });
   };
 
   render() {
