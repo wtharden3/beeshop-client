@@ -1,5 +1,5 @@
 import {Component, MouseEvent, FormEvent} from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import APIURL from '../../helpers/environment';
 import { DeleteOutlined } from '@ant-design/icons';
 
@@ -23,6 +23,14 @@ class ProductDelete extends Component<ProductDeleteProps, ProductDeleteState>{
     }
   }
 
+  success = () => {
+    message.success('You have successfully Deleted this order');
+  };
+
+  error = () => {
+    message.error('Please try again');
+  };
+
   handleDeleteBtn = (e: MouseEvent) => {
     e.preventDefault()
     console.log('Delete this product')
@@ -40,8 +48,12 @@ class ProductDelete extends Component<ProductDeleteProps, ProductDeleteState>{
     .then(data => {
       console.log('this is from DELETE==>', data)
       this.props.getProducts(e);
+      this.success()
       })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      this.error()
+      })
   }
 
 

@@ -1,6 +1,6 @@
 import { Component, FormEvent, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import { Row, Col, Form, Select, Input, Button } from 'antd';
+import { message, Row, Col, Form, Select, Input, Button } from 'antd';
 
 const { Option } = Select;
 
@@ -58,6 +58,14 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
       },
     };
   }
+
+  success = () => {
+    message.success('You have successfully Updated this Item');
+  };
+
+  error = () => {
+    message.error('Please try again');
+  };
 
   handleEditNameChange = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
@@ -170,8 +178,12 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
       .then(data => {
         console.log(data)
         this.props.getProducts(e);
+        this.success();
         })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.error();
+        console.log(err)
+        });
   };
 
   render() {

@@ -1,30 +1,38 @@
-import {Component, MouseEvent} from 'react';
-import { Button } from 'antd';
+import { Component, MouseEvent } from 'react';
+import { Button, message } from 'antd';
 import APIURL from '../../helpers/environment';
 import { DeleteOutlined } from '@ant-design/icons';
 
 type OrderDeleteProps = {
   token: string;
   id: number;
-}
+};
 
 type OrderDeleteState = {
   holder: string;
   orderid: number;
-}
+};
 
-class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState>{
-  constructor(props: OrderDeleteProps){
+class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState> {
+  constructor(props: OrderDeleteProps) {
     super(props);
-    this.state={
-      holder: "",
-      orderid: this.props.id
-    }
+    this.state = {
+      holder: '',
+      orderid: this.props.id,
+    };
   }
 
+  success = () => {
+    message.success('You have successfully Deleted this order');
+  };
+
+  error = () => {
+    message.error('Please try again');
+  };
+
   handleDeleteBtn = (e: MouseEvent) => {
-    e.preventDefault()
-    console.log('Delete this order')
+    e.preventDefault();
+    console.log('Delete this order');
     const orderid: number = this.state.orderid;
     const url: string = `${APIURL}/orders/delete/${orderid}`;
 
@@ -32,21 +40,32 @@ class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState>{
       method: 'DELETE',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: this.props.token
-      })
+        Authorization: this.props.token,
+      }),
     })
-    .then(res => res.json())
-    .then(data => console.log('this is from DELETE==>', data))
-    .catch(err => console.log(err))
-  }
+      .then(res => res.json())
+      .then(data => {
+        console.log('this is from DELETE==>', data);
+        this.success();
+      })
+      .catch(err => {
+        this.error();
+        console.log(err);
+      });
+  };
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
         <p>Delete this product</p>
-        <Button type="primary" onClick={this.handleDeleteBtn}>Delete <span className="icons-list"><DeleteOutlined /></span></Button>
+        <Button type="primary" onClick={this.handleDeleteBtn}>
+          Delete{' '}
+          <span className="icons-list">
+            <DeleteOutlined />
+          </span>
+        </Button>
       </div>
-    )
+    );
   }
 }
 
