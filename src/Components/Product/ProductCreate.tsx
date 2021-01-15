@@ -1,6 +1,8 @@
 import { Component, FormEvent, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
-import { Button } from 'antd';
+import { Row, Col, Form, Select, Input, Button } from 'antd';
+
+const { Option } = Select;
 
 type ProductCreateProps = {
   token: string;
@@ -67,12 +69,12 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
     });
   };
 
-  handleCategoryChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleCategoryChange = (value: string): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
         description: this.state.product.description,
-        category: e.currentTarget.value,
+        category: value,
         subCategory: this.state.product.subCategory,
         productCost: this.state.product.productCost,
         size: this.state.product.size,
@@ -80,13 +82,13 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
     });
   };
 
-  handleProdSubcategoryChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleProdSubcategoryChange = (value: string): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
         description: this.state.product.description,
         category: this.state.product.category,
-        subCategory: e.currentTarget.value,
+        subCategory: value,
         productCost: this.state.product.productCost,
         size: this.state.product.size,
       },
@@ -106,7 +108,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
     });
   };
 
-  handleSizeChange = (e: FormEvent<HTMLInputElement>): void => {
+  handleSizeChange = (value: string): void => {
     this.setState({
       product: {
         productName: this.state.product.productName, //currentTarget vs target
@@ -114,7 +116,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
         category: this.state.product.category,
         subCategory: this.state.product.subCategory,
         productCost: this.state.product.productCost,
-        size: e.currentTarget.value,
+        size: value,
       },
     });
   };
@@ -146,6 +148,8 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
       .then(res => res.json())
       .then(data => {
         console.log(data);
+        //added this for auto update of product list
+        this.props.getProducts(e);
       })
       .catch(err => console.log(err));
   };
@@ -154,48 +158,103 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
     return (
       <div>
         <h2>Add a Product</h2>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="Product Name"
-            value={this.state.product.productName}
-            onChange={this.handleNameChange}
-          />
-          <input
-            type="text"
-            placeholder="Product Description"
-            value={this.state.product.description}
-            onChange={this.handleDescriptionChange}
-          />
-          <input
-            type="text"
-            placeholder="Product Category"
-            value={this.state.product.category}
-            onChange={this.handleCategoryChange}
-          />
-          <input
-            type="text"
-            placeholder="Product subcategory"
-            value={this.state.product.subCategory}
-            onChange={this.handleProdSubcategoryChange}
-          />
-          <input
-            type="number"
-            placeholder="Product Cost"
-            value={this.state.product.productCost}
-            onChange={this.handleProductCostChange}
-          />
-          <input
-            type="text"
-            placeholder="Product Size"
-            value={this.state.product.size}
-            onChange={this.handleSizeChange}
-          />
-          <Button type="primary" onClick={this.handleSubmit}>Submit</Button>
-        </form>
-        <Button  onClick={this.props.getProducts}>
+        <Form onFinish={this.handleSubmit}>
+          <Row
+            style={{ marginLeft: '20px', marginRight: '20px' }}
+            justify="space-around"
+          >
+            <Col span={24}>
+              <Form.Item label="Product Name" name="createProductName">
+                <Input
+                  type="text"
+                  value={this.state.product.productName}
+                  onChange={this.handleNameChange}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="Product Description" name="createDescription">
+                <Input
+                  type="text"
+                  placeholder="Product Description"
+                  value={this.state.product.description}
+                  onChange={this.handleDescriptionChange}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="Product Category" name="createCategory">
+                {/* <Input
+                  type="text"
+                  placeholder="Product Category"
+                  value={this.state.product.category}
+                  onChange={this.handleCategoryChange}
+                /> */}
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="Subcategory" name="createSubCategory">
+                <Select defaultValue="tees" onChange={this.handleProdSubcategoryChange}>
+                  <Option value="sweatshirts">sweatshirts</Option>
+                  <Option value="hoodies">hoodies</Option>
+                  <Option value="tees">tees</Option>
+                  <Option value="leggings">leggings</Option>
+                  <Option value="joggers">joggers</Option>
+                  <Option value="shorts">shorts</Option>
+                  <Option value="jewelry">jewelry</Option>
+                  <Option value="socks">socks</Option>
+                  <Option value="shoes">shoes</Option>
+                  <Option value="boots">boots</Option>
+                  <Option value="hats">hats</Option>
+                </Select>
+                {/* <Input
+                  type="text"
+                  value={this.state.product.subCategory}
+                  onChange={this.handleProdSubcategoryChange}
+                /> */}
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="Product Cost" name="createCost">
+                <Input
+                  type="number"
+                  value={this.state.product.productCost}
+                  onChange={this.handleProductCostChange}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="Select Product Size" name="createSize">
+                <Select defaultValue="large" onChange={this.handleSizeChange}>
+                  <Option value="xsmall">XS</Option>
+                  <Option value="small">small</Option>
+                  <Option value="medium">medium</Option>
+                  <Option value="large">large</Option>
+                  <Option value="xlarge">XL</Option>
+                  <Option value="2x">2x</Option>
+                  <Option value="3x">3x</Option>
+                  <Option value="4x">4x</Option>
+                  
+                </Select>
+                {/* <Input
+              type="text"
+              value={this.state.product.size}
+              onChange={this.handleSizeChange}
+            /> */}
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item>
+                <Button type="primary" onClick={this.handleSubmit}>
+                  Submit
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+        {/* <Button  onClick={this.props.getProducts}>
           Show updated Product List
-        </Button>
+        </Button> */}
       </div>
     );
   }

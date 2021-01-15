@@ -123,12 +123,6 @@ class ProductsPortal extends Component<
             <div>There are no products to display</div>
           )}
         </div>
-
-        {/**edit section */}
-        {/* <Button type="primary">Edit</Button> */}
-
-        {/** delete section */}
-        {/* <Button type="primary">Delete</Button> */}
       </div>
     );
   }
