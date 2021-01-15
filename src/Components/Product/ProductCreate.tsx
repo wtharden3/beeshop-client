@@ -184,7 +184,10 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             </Col>
             <Col span={24}>
               <Form.Item label="Product Category" name="createCategory">
-                <Select defaultValue="tops" onChange={this.handleCategoryChange}>
+                <Select
+                  defaultValue="tops"
+                  onChange={this.handleCategoryChange}
+                >
                   <Option value="tops">tops</Option>
                   <Option value="bottoms">bottoms</Option>
                   <Option value="accessories">accessories</Option>
@@ -202,7 +205,10 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             </Col>
             <Col span={24}>
               <Form.Item label="Subcategory" name="createSubCategory">
-                <Select defaultValue="tees" onChange={this.handleProdSubcategoryChange}>
+                <Select
+                  defaultValue="tees"
+                  onChange={this.handleProdSubcategoryChange}
+                >
                   <Option value="sweatshirts">sweatshirts</Option>
                   <Option value="hoodies">hoodies</Option>
                   <Option value="tees">tees</Option>
@@ -215,11 +221,6 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
                   <Option value="boots">boots</Option>
                   <Option value="hats">hats</Option>
                 </Select>
-                {/* <Input
-                  type="text"
-                  value={this.state.product.subCategory}
-                  onChange={this.handleProdSubcategoryChange}
-                /> */}
               </Form.Item>
             </Col>
             <Col span={24}>
@@ -242,13 +243,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
                   <Option value="2x">2x</Option>
                   <Option value="3x">3x</Option>
                   <Option value="4x">4x</Option>
-                  
                 </Select>
-                {/* <Input
-              type="text"
-              value={this.state.product.size}
-              onChange={this.handleSizeChange}
-            /> */}
               </Form.Item>
             </Col>
             <Col span={24}>

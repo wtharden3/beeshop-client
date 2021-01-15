@@ -1,4 +1,4 @@
-import { Component, FormEvent } from 'react';
+import { Component, FormEvent, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 import { Row, Col, Form, Select, Input, Button } from 'antd';
 
@@ -14,6 +14,7 @@ type ProductEditProps = {
   subCategory: string;
   // id: number;
   size: string;
+  getProducts: (e: MouseEvent | FormEvent) => void;
 };
 
 type ProductEditState = {
@@ -166,7 +167,10 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
       }),
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+        this.props.getProducts(e);
+        })
       .catch(err => console.log(err));
   };
 
@@ -234,7 +238,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
             <Col span={24}>
               <Form.Item label="Subcategory" name="editSubCategory">
                 <Select
-                  defaultValue="tees"
+                  defaultValue={this.state.product.subCategory}
                   onChange={this.handleEditProdSubcategoryChange}
                 >
                   <Option value="sweatshirts">sweatshirts</Option>
@@ -274,7 +278,7 @@ class ProductEdit extends Component<ProductEditProps, ProductEditState> {
             /> */}
             <Col span={24}>
               <Form.Item label="Select Product Size" name="editSize">
-                <Select defaultValue="large" onChange={this.handleEditSizeChange}>
+                <Select defaultValue={this.state.product.size} onChange={this.handleEditSizeChange}>
                   <Option value="xsmall">XS</Option>
                   <Option value="small">small</Option>
                   <Option value="medium">medium</Option>

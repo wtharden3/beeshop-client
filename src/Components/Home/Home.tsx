@@ -175,8 +175,5 @@ class Home extends Component<HomeProps, Products> {
   }
 }
 
-// Home.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default Home;

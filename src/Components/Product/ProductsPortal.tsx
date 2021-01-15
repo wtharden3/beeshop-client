@@ -112,9 +112,10 @@ class ProductsPortal extends Component<
                   productCost={product.productCost}
                   id={product.id}
                   token={this.props.token}
+                  getProducts={this.getProducts}
                 />
                 <br />
-                <ProductDelete id={product.id} token={this.props.token} />
+                <ProductDelete getProducts={this.getProducts} id={product.id} token={this.props.token} />
                 <br />
                 <hr />
               </ul>

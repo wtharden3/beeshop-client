@@ -1,4 +1,4 @@
-import {Component, MouseEvent} from 'react';
+import {Component, MouseEvent, FormEvent} from 'react';
 import { Button } from 'antd';
 import APIURL from '../../helpers/environment';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -6,6 +6,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 type ProductDeleteProps = {
   token: string;
   id: number;
+  getProducts: (e: MouseEvent | FormEvent) => void;
 }
 
 type ProductDeleteState = {
@@ -36,7 +37,10 @@ class ProductDelete extends Component<ProductDeleteProps, ProductDeleteState>{
       })
     })
     .then(res => res.json())
-    .then(data => console.log('this is from DELETE==>', data))
+    .then(data => {
+      console.log('this is from DELETE==>', data)
+      this.props.getProducts(e);
+      })
     .catch(err => console.log(err))
   }
 
@@ -44,7 +48,7 @@ class ProductDelete extends Component<ProductDeleteProps, ProductDeleteState>{
   render(){
     return(
       <div>
-        <Button type="primary" onClick={this.handleDeleteBtn}>Delete <span className="icons-list"><DeleteOutlined /></span></Button>
+        <Button type="primary" onClick={this.handleDeleteBtn}>delete {' '} <span className="icons-list"><DeleteOutlined /></span></Button>
       </div>
     )
   }
