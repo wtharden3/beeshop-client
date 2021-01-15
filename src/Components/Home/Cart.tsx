@@ -1,6 +1,10 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 //this is Order Create - the C of the CRUD for Orders
+import { Row, Col, Button, Card } from 'antd';
+
+const { Meta } = Card;
+
 type CartProps = {
   token: string;
   productTotal: string;
@@ -97,8 +101,8 @@ class Cart extends Component<CartProps, CartState> {
     e.preventDefault();
     //update cart cost
     //this.updateCartCost();
-      let newtotalCost = 0;
-    
+    let newtotalCost = 0;
+
     this.props.cart.map((cartItem: CartObj) => {
       //prodCost.toFixed(2) - for 2 decimal points
 
@@ -109,7 +113,7 @@ class Cart extends Component<CartProps, CartState> {
       console.log('newNum===>', Math.floor(newNum * 100) / 100); //round to 2 decimal places
       //console.log(this.state.totalCost);
       this.setState({ totalCost: Math.floor(newNum * 100) / 100 });
-       newtotalCost = (Math.floor(newNum * 100) / 100);
+      newtotalCost = Math.floor(newNum * 100) / 100;
       return newtotalCost;
     });
 
@@ -164,37 +168,39 @@ class Cart extends Component<CartProps, CartState> {
   render() {
     return (
       <div>
-        <p>This will later be a modal or a pop out of some kind</p>
-        <h2>Cart</h2>
-        <p>here are your cart details, click below to place your order</p>
-        <div>
-          {/* <p>
+        <Card>
+          <h2>Cart</h2>
+        </Card>
+        <Card>
+          <div>
+            {/* <p>
             there should be a button from the store display that allows you to
             add to cart array cart array should be displayed here using map
           </p> */}
-          {/* <div>{this.displayCartItems()}</div> */}
-          <div>
-            {this.props.cart.length > 0 ? (
-              this.props.cart.map((item: CartObj, index: number) => (
-                <ul className="noDecor" key={index}>
-                  <li>{item.productName}</li>
-                  <li>{item.productQuantity}</li>
-                  <li>{item.productCost}</li>
-                </ul>
-              ))
-            ) : (
-              <div>Cart is empty</div>
-            )}
+            {/* <div>{this.displayCartItems()}</div> */}
+            <div>
+              {this.props.cart.length > 0 ? (
+                this.props.cart.map((item: CartObj, index: number) => (
+                  <ul className="noDecor" key={index}>
+                    <li>{item.productName}</li>
+                    <li>{item.productQuantity}</li>
+                    <li>{item.productCost}</li>
+                  </ul>
+                ))
+              ) : (
+                <div>Cart is empty</div>
+              )}
+            </div>
+            {/* <button onClick={this.updateCartCost}>click for cost</button> */}
+            <div>You have {this.props.cart.length} items in your cart</div>
+            <div>You have {this.state.totalItems} items in your cart</div>
+            <div>
+              {this.state.totalCost} is the total cost of the items in your cart
+            </div>
           </div>
-          <button onClick={this.updateCartCost}>click for cost</button>
-          <div>You have {this.props.cart.length} items in your cart</div>
-          <div>You have {this.state.totalItems} items in your cart</div>
-          <div>
-            {this.state.totalCost} is the total cost of the items in your cart
-          </div>
-        </div>
 
-        <button onClick={this.handleClick}>Place Order</button>
+          <Button type="primary" onClick={this.handleClick}>Place Order</Button>
+        </Card>
       </div>
     );
   }
