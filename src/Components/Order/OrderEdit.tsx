@@ -1,5 +1,5 @@
 import { Component, FormEvent } from 'react';
-import { Button } from 'antd';
+import { message, Form, Input, Button, Row, Col } from 'antd';
 import APIURL from '../../helpers/environment';
 // import { stringify } from 'querystring';
 
@@ -41,16 +41,24 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
         // totalCost: '',
         // totalItems: '',
         details: this.props.details,
-        shippingInfo: this.props.shippingInfo
+        shippingInfo: this.props.shippingInfo,
       },
     };
   }
+
+  success = () => {
+    message.success('You have successfully Updated this Order');
+  };
+
+  error = () => {
+    message.error('Please try again');
+  };
 
   handleEditDeets = (e: FormEvent<HTMLInputElement>): void => {
     this.setState({
       order: {
         details: e.currentTarget.value,
-        shippingInfo: this.state.order.shippingInfo
+        shippingInfo: this.state.order.shippingInfo,
       },
     });
   };
@@ -59,7 +67,7 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
     this.setState({
       order: {
         details: this.state.order.details,
-        shippingInfo: e.currentTarget.value
+        shippingInfo: e.currentTarget.value,
       },
     });
   };
@@ -72,7 +80,7 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
     const bodyObj: OrderObj = {
       order: {
         details: this.state.order.details,
-        shippingInfo: this.state.order.shippingInfo
+        shippingInfo: this.state.order.shippingInfo,
       },
     };
 
@@ -86,32 +94,46 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        this.props.getAllOrders()
-        })
+        console.log(data);
+        this.props.getAllOrders();
+      })
       .catch(err => console.log(err));
   };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleEditSubmit}>
-          <input
-            type="text"
-            placeholder="Details"
-            value={this.state.order.details}
-            onChange={this.handleEditDeets}
-          />
-          <input
-            type="text"
-            placeholder="Shipping Info"
-            value={this.state.order.shippingInfo}
-            onChange={this.handleEditShipInfo}
-          />
-          <Button type="primary" onClick={this.handleEditSubmit}>
-            Submit Edit
-          </Button>
-        </form>
+        <Form onFinish={this.handleEditSubmit}>
+          <Row>
+            <Col span={24}>
+              <Form.Item label="Order Details" name="editDetails">
+                <Input
+                  type="text"
+                  placeholder="Details"
+                  value={this.state.order.details}
+                  onChange={this.handleEditDeets}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="Shipping Info" name="shipInfo">
+                <Input
+                  type="text"
+                  placeholder="Shipping Info"
+                  value={this.state.order.shippingInfo}
+                  onChange={this.handleEditShipInfo}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item>
+                <Button type="primary" onClick={this.handleEditSubmit}>
+                  Submit Edit
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
       </div>
     );
   }

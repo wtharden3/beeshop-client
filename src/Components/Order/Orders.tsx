@@ -2,12 +2,12 @@ import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 import OrderEdit from './OrderEdit';
 import OrderDelete from './OrderDelete';
-import { Row, Col } from 'antd';
+import { Row, Col, Card } from 'antd';
 // import Cart from './Cart';
+const { Meta } = Card;
 
 type OrdersProps = {
   token: string;
-  
 };
 
 type OrderState = {
@@ -48,10 +48,9 @@ class Orders extends Component<OrdersProps, OrderState> {
         } else {
           console.log('there are no orders yet');
         }
-        
       })
       .catch(err => console.log(err));
-  }
+  };
   handleEditClick = (e: MouseEvent) => {
     console.log('clicked from Order Edit. This is Ant design');
   };
@@ -79,13 +78,21 @@ class Orders extends Component<OrdersProps, OrderState> {
   displayOrders = () => {
     return this.state.orders.map(order => {
       order ? (
-        <div key={order.id}>
-          <p>Order id: {order.id}</p>
-          <p>Total Cost: {order.totalCost}</p>
-          <p>Total Items: {order.totalItems}</p>
-          <p>Details: {order.details}</p>
-          <p>shippingInfo: {order.shippingInfo}</p>
-          <OrderEdit getAllOrders={this.getAllOrders} details={order.details} shippingInfo={order.shippingInfo} token={this.props.token} id={order.id} />
+        <div>
+          <div key={order.id}>
+            <p>Order id: {order.id}</p>
+            <p>Total Cost: {order.totalCost}</p>
+            <p>Total Items: {order.totalItems}</p>
+            <p>Details: {order.details}</p>
+            <p>shippingInfo: {order.shippingInfo}</p>
+            <OrderEdit
+              getAllOrders={this.getAllOrders}
+              details={order.details}
+              shippingInfo={order.shippingInfo}
+              token={this.props.token}
+              id={order.id}
+            />
+          </div>
         </div>
       ) : (
         <div>
@@ -108,16 +115,27 @@ class Orders extends Component<OrdersProps, OrderState> {
             {orders
               ? orders.map(order => (
                   <Col xs={24} sm={12}>
-                    <div key={order.id}>
-                      <p>Order ID: {order.id}</p>
-                      <p>Total Cost: {order.totalCost}</p>
-                      <p>Total Items: {order.totalItems}</p>
-                      <p>Details: {order.details}</p>
-                      <p>shippingInfo: {order.shippingInfo}</p>
-                      <OrderEdit getAllOrders={this.getAllOrders} details={order.details} shippingInfo={order.shippingInfo} token={token} id={order.id} />
-                      <OrderDelete getAllOrders={this.getAllOrders} token={token} id={order.id} />
-                      <hr />
-                    </div>
+                    <Card>
+                      <div key={order.id}>
+                        <p>Order ID: {order.id}</p>
+                        <p>Total Cost: {order.totalCost}</p>
+                        <p>Total Items: {order.totalItems}</p>
+                        <p>Details: {order.details}</p>
+                        <p>shippingInfo: {order.shippingInfo}</p>
+                        <OrderEdit
+                          getAllOrders={this.getAllOrders}
+                          details={order.details}
+                          shippingInfo={order.shippingInfo}
+                          token={token}
+                          id={order.id}
+                        />
+                        <OrderDelete
+                          getAllOrders={this.getAllOrders}
+                          token={token}
+                          id={order.id}
+                        />
+                      </div>
+                    </Card>
                   </Col>
                 ))
               : null}
