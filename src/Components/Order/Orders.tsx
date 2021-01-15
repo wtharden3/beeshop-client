@@ -67,7 +67,7 @@ class Orders extends Component<OrdersProps, OrderState> {
           <p>Total Items: {order.totalItems}</p>
           <p>Details: {order.details}</p>
           <p>shippingInfo: {order.shippingInfo}</p>
-          <OrderEdit token={this.props.token} id={order.id} />
+          <OrderEdit details={order.details} shippingInfo={order.shippingInfo} token={this.props.token} id={order.id} />
         </div>
       ) : (
         <div>
@@ -96,7 +96,7 @@ class Orders extends Component<OrdersProps, OrderState> {
                       <p>Total Items: {order.totalItems}</p>
                       <p>Details: {order.details}</p>
                       <p>shippingInfo: {order.shippingInfo}</p>
-                      <OrderEdit token={token} id={order.id} />
+                      <OrderEdit details={order.details} shippingInfo={order.shippingInfo} token={token} id={order.id} />
                       <OrderDelete token={token} id={order.id} />
                       <hr />
                     </div>
