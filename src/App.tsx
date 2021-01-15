@@ -37,8 +37,8 @@ class App extends Component<AppProps, AppState> {
   //this needs to go on Navbar
   clearToken = () => {
     const localToken = localStorage.getItem('token');
-    localStorage.setItem('token', '');
-    this.setState({ token: '' });
+    localStorage.setItem('token', 'undefined');
+    this.setState({ token: 'undefined' });
     console.log('cleartoken', localToken);
   };
 

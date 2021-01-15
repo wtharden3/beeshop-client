@@ -67,7 +67,7 @@ class Cart extends Component<CartProps, CartState> {
   //update totals
   //updateTotals() //params come from home component
 
-//understand this
+  //understand this
   updateCartCost = () => {
     return this.props.cart.map((cartItem: CartObj) => {
       //prodCost.toFixed(2) - for 2 decimal points
@@ -79,13 +79,12 @@ class Cart extends Component<CartProps, CartState> {
       console.log('newNum===>', Math.floor(newNum * 100) / 100); //round to 2 decimal places
       this.setState({ totalCost: Math.floor(newNum * 100) / 100 });
       console.log(this.state.totalCost);
-
-      // return(
-      //   <div>
-      //     {this.state.totalCost}
-      //   </div>
-      // )
     });
+  };
+
+  emptyCartTotalCost = () => {
+    this.setState({ totalCost: 0 });
+    //need to empty cart also - this should start where HOME got addToCart() from
   };
 
   // updateCartCost = () => {
@@ -96,14 +95,32 @@ class Cart extends Component<CartProps, CartState> {
 
   handleClick = (e: MouseEvent) => {
     e.preventDefault();
+    //update cart cost
+    //this.updateCartCost();
+      let newtotalCost = 0;
+    
+    this.props.cart.map((cartItem: CartObj) => {
+      //prodCost.toFixed(2) - for 2 decimal points
+
+      this.state.cartCosts.push(cartItem.productCost);
+      const newNum = this.state.cartCosts.reduce((total, num) => {
+        return Math.floor(total * 100) / 100 + Math.floor(num * 100) / 100;
+      });
+      console.log('newNum===>', Math.floor(newNum * 100) / 100); //round to 2 decimal places
+      //console.log(this.state.totalCost);
+      this.setState({ totalCost: Math.floor(newNum * 100) / 100 });
+       newtotalCost = (Math.floor(newNum * 100) / 100);
+      return newtotalCost;
+    });
+
     const url: string = `${APIURL}/orders/placeorder`;
     const bodyObj: BodyObj = {
       order: {
-        totalCost: this.state.totalCost,
+        totalCost: newtotalCost,
         totalItems: this.state.totalItems,
-//need to update with additional values from order
+        //need to update with additional values from order
         details: `Your order was placed on today (find date)`,
-        shippingInfo: 'has not shipped yet'
+        shippingInfo: 'has not shipped yet',
       },
     };
 
@@ -119,6 +136,8 @@ class Cart extends Component<CartProps, CartState> {
       .then(data => {
         // console.log('hello again mark');
         console.log('data - Order was placed ===>', data.order);
+        this.emptyCartTotalCost();
+
         //map through data
         // if (data.order.length === 0) {
         //   data.order.map((item: CartObj) => console.log(item));

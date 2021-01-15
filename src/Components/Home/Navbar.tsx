@@ -78,6 +78,11 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     // this.setState({cart: arrayOfProducts})
   };
 
+  emptyCart = () => {
+    //this needs to used as token is cleared and new login and after order is placed
+    this.setState({cart: []})
+  }
+
   //this is passed on to HOMe - STEP 1
   updateTotals = (prodCost: number): void => {
     this.setState({ productCostTotal: prodCost.toString() });

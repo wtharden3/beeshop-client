@@ -4,7 +4,7 @@ import { Button } from 'antd';
 
 type ProductCreateProps = {
   token: string;
-  getProducts: (e: MouseEvent) => void;
+  getProducts: (e: MouseEvent | FormEvent) => void;
   // handleProNameChange: (e: FormEvent<HTMLInputElement>) => void;
 };
 
@@ -121,6 +121,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
 
   handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
+    this.props.getProducts(e);
     const url: string = `${APIURL}/products/addtoinventory`;
     const bodyObj: ProductCreateState = {
       product: {

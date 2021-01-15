@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import APIURL from '../../helpers/environment';
-import { Row, Col, Form, Input, Button } from 'antd';
+import { Row, Col, Form, Select, Input, Button } from 'antd';
+
+const { Option } = Select;
 
 type SignUpState = {
   firstName: string;
@@ -26,8 +28,13 @@ class Signup extends Component<SignUpProps, SignUpState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleSelect = (value: string) => {
+    console.log(`this is the value ${value}`);
+    this.setState({ userRole: value });
+  };
+
   handleSubmit = () => {
-   //e.preventDefault();
+    //e.preventDefault();
     //fetch and set value
     const firstName: string = this.state.firstName;
     const lastName: string = this.state.lastName;
@@ -142,6 +149,14 @@ class Signup extends Component<SignUpProps, SignUpState> {
                   value={this.state.password}
                   onChange={e => this.setState({ password: e.target.value })}
                 />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item label="What Experience Do you want?">
+                <Select defaultValue="customer" onChange={this.handleSelect}>
+                  <Option value="admin">I want to be the Store Owner</Option>
+                  <Option value="customer">I want to shop</Option>
+                </Select>
               </Form.Item>
             </Col>
 

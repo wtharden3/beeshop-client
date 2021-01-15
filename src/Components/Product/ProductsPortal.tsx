@@ -1,4 +1,4 @@
-import { Component, MouseEvent } from 'react';
+import { Component, FormEvent, MouseEvent } from 'react';
 import ProductCreate from './ProductCreate';
 import ProductEdit from './ProductEdit';
 import APIURL from '../../helpers/environment';
@@ -39,7 +39,7 @@ class ProductsPortal extends Component<
     };
   }
 
-  getProducts = (e: MouseEvent): void => {
+  getProducts = (e: MouseEvent | FormEvent<EventTarget>): void => {
     e.preventDefault();
     fetch(`${APIURL}/products/inventory`, {
       method: 'GET',
@@ -92,6 +92,7 @@ class ProductsPortal extends Component<
         <hr />
         <h2>Current Products</h2>
         <div>
+          {/** make this its own component - call anywhere - or copy paste in another */}
           {this.state.productList ? (
             this.state.productList.map(product => (
               <ul className="noDecor" key={product.id}>

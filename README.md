@@ -1,19 +1,38 @@
 # The Beeshop client project 
 ## Whitney Harden 
-[Whitney's Github](https://github.com/)wtharden3
+[Whitney's Github](https://github.com/wtharden3)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This project was created utilizing, react (stateful components) and TypeScript. 
 
-## Admin Login
-The credentials to log in as an admin user is as follows:
+## Using Beeshop locally
 
-user: boss@email.com
-pass: pass
+1. You must also download the server which can be found at Github: [Beeshop-Server](https://github.com/wtharden3/beeshop-server)
 
-## Admin Capabilities
-Access to Products Portal and all it's functionality
+2. You must create a postgres database. I used [PgAdmin](https://www.pgadmin.org/download/). The steps to complete the database will be on the README.md of the [beeshop server](https://github.com/wtharden3/beeshop-server).
 
-Ability to view all orders of all users
+3. Once you have cloned the project locally run `npm install`.
+
+4. In order to run it locally. Start the beeshop-server. The directions to do that are listed on the he README.md of the [beeshop server](https://github.com/wtharden3/beeshop-server).
+
+5. then `npm start` to run the application.
+
+## User Roles
+
+1. Shopper - the shopper is the general user. The are able to view the store and most of the site aside from "Dashboard". They can also add to the cart. They must log in with either a customer account or admin account to place an order 
+
+2. Customer - the customer can do everything the shopper can do pluse they add to place an order, view their orders, edit an order, delete orders. 
+
+3. Admin - The admin can do everything the customer can do plus add new products to the store, view all orders, edit all orders, delete any order, and edit or delete any product.
+
+## Customer Signup
+In order to sign up as a customer, you must comeplete the signup form and select "I want to shop".
+
+
+## Admin Signup
+In order to sign up as a customer, you must comeplete the signup form and select "I want to be a store owner".
+
+
+# General Info about this React project: 
 
 ## Available Scripts
 
