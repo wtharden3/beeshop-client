@@ -109,7 +109,9 @@ class Orders extends Component<OrdersProps, OrderState> {
       <div>
         <div>
           {/* <div>{orders.message}</div> */}
-          <h3>Orders</h3>
+          <Card>
+            <h3>Orders</h3>
+          </Card>
           {/* <Cart token={this.state.token}/> */}
           <Row>
             {orders

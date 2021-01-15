@@ -60,7 +60,7 @@ class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState> {
   render() {
     return (
       <div>
-        <Button type="primary" onClick={this.handleDeleteBtn}>
+        <Button onClick={this.handleDeleteBtn}>
           Delete{' '}
           <span className="icons-list">
             <DeleteOutlined />
