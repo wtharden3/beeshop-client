@@ -7,6 +7,7 @@ import { Row, Col } from 'antd';
 
 type OrdersProps = {
   token: string;
+  
 };
 
 type OrderState = {
@@ -31,9 +32,26 @@ class Orders extends Component<OrdersProps, OrderState> {
     };
   }
 
-  // getAllOrders = () => {
-
-  // }
+  getAllOrders = () => {
+    fetch(`${APIURL}/orders/list`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: this.props.token,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('orders data', data.order);
+        if (data.order) {
+          this.setState({ orders: data.order });
+        } else {
+          console.log('there are no orders yet');
+        }
+        
+      })
+      .catch(err => console.log(err));
+  }
   handleEditClick = (e: MouseEvent) => {
     console.log('clicked from Order Edit. This is Ant design');
   };
@@ -52,7 +70,7 @@ class Orders extends Component<OrdersProps, OrderState> {
         if (data.order) {
           this.setState({ orders: data.order });
         } else {
-          console.log('there is no orders yet');
+          console.log('there are no orders yet');
         }
       })
       .catch(err => console.log(err));
@@ -67,7 +85,7 @@ class Orders extends Component<OrdersProps, OrderState> {
           <p>Total Items: {order.totalItems}</p>
           <p>Details: {order.details}</p>
           <p>shippingInfo: {order.shippingInfo}</p>
-          <OrderEdit details={order.details} shippingInfo={order.shippingInfo} token={this.props.token} id={order.id} />
+          <OrderEdit getAllOrders={this.getAllOrders} details={order.details} shippingInfo={order.shippingInfo} token={this.props.token} id={order.id} />
         </div>
       ) : (
         <div>
@@ -96,8 +114,8 @@ class Orders extends Component<OrdersProps, OrderState> {
                       <p>Total Items: {order.totalItems}</p>
                       <p>Details: {order.details}</p>
                       <p>shippingInfo: {order.shippingInfo}</p>
-                      <OrderEdit details={order.details} shippingInfo={order.shippingInfo} token={token} id={order.id} />
-                      <OrderDelete token={token} id={order.id} />
+                      <OrderEdit getAllOrders={this.getAllOrders} details={order.details} shippingInfo={order.shippingInfo} token={token} id={order.id} />
+                      <OrderDelete getAllOrders={this.getAllOrders} token={token} id={order.id} />
                       <hr />
                     </div>
                   </Col>

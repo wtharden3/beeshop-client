@@ -8,6 +8,7 @@ type OrderEditProps = {
   id: number;
   details: string;
   shippingInfo: string;
+  getAllOrders: () => void;
 };
 
 type OrderEditState = {
@@ -84,7 +85,10 @@ class OrderEdit extends Component<OrderEditProps, OrderEditState> {
       }),
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+        this.props.getAllOrders()
+        })
       .catch(err => console.log(err));
   };
 

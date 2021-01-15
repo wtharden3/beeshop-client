@@ -6,6 +6,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 type OrderDeleteProps = {
   token: string;
   id: number;
+  getAllOrders: () => void;
 };
 
 type OrderDeleteState = {
@@ -46,9 +47,11 @@ class OrderDelete extends Component<OrderDeleteProps, OrderDeleteState> {
       .then(res => res.json())
       .then(data => {
         console.log('this is from DELETE==>', data);
+        this.props.getAllOrders()
         this.success();
       })
       .catch(err => {
+
         this.error();
         console.log(err);
       });
