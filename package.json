@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "less": "lessc src/style.less src/style.css"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "less": "^4.1.0"
   }
 }
