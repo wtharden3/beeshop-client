@@ -134,6 +134,10 @@ class Home extends Component<HomeProps, Products> {
   render() {
     return (
       <div>
+        <div style={{backgroundColor: purple.primary, height: '100vh'}}>
+          <h1>The Bee Lounge</h1>
+          <span>icon</span>
+        </div>
         <Card>
           <h2>Featured Products</h2>
         </Card>
