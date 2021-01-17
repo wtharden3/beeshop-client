@@ -1,6 +1,7 @@
 import { Component, MouseEvent } from 'react';
 import APIURL from '../../helpers/environment';
 import { Row, Col, Button, Card } from 'antd';
+import { purple } from '@ant-design/colors';
 
 const { Meta } = Card;
 
@@ -154,6 +155,7 @@ class Home extends Component<HomeProps, Products> {
                       <li>{product.description}</li>
                       <li>Price: ${product.productCost}</li>
                       <Button
+                      type="primary"
                         onClick={this.addToCart}
                         className={`p-${product.id}`}
                       >

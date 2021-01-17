@@ -6,6 +6,7 @@ import Cart from './Cart';
 import Orders from '../Order/Orders';
 import ProductsPortal from '../Product/ProductsPortal';
 import { ShoppingCartOutlined, LogoutOutlined } from '@ant-design/icons';
+import { purple, yellow } from '@ant-design/colors';
 import { Button } from 'antd';
 
 type NavbarProps = {
@@ -116,6 +117,8 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   // END MATERIAL UI
 
   componentDidMount() {
+    console.log('all the purples', purple)
+    console.log('purple.primary', purple.primary)
   }
 
   //when the compenent is changed
@@ -190,7 +193,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             ) : null}
           </div>
 
-          <hr />
+          
           <Switch>
             <Route exact path="/">
               <Home

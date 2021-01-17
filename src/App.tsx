@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import Navbar from './Components/Home/Navbar';
 
+
 //using alias over interfaces //https://medium.com/@koss_lebedev/type-aliases-vs-interfaces-in-typescript-based-react-apps-e77c9a1d5fd0
 
 type AppState = {
@@ -20,7 +21,7 @@ class App extends Component<AppProps, AppState> {
     this.state = {
       token: '',
       name: '',
-      isAdmin: false
+      isAdmin: false,
     };
 
     //  this.setToken = this.setToken.bind(this);
@@ -43,21 +44,20 @@ class App extends Component<AppProps, AppState> {
   };
 
   showForAdmin = (userRole: string) => {
-    if(userRole === 'admin'){
-      this.setState({isAdmin: true})
+    if (userRole === 'admin') {
+      this.setState({ isAdmin: true });
     } else {
-      this.setState({isAdmin: false})
+      this.setState({ isAdmin: false });
     }
-  } 
+  };
 
   render() {
     //state - so we don't have to keep typing 'this.state.token' for  example
-    const {token, name, isAdmin } = this.state;
+    const { token, name, isAdmin } = this.state;
     //props - methods
-    const {setToken, clearToken, showForAdmin} = this;
+    const { setToken, clearToken, showForAdmin } = this;
     return (
       <div className="App">
-        
         <Navbar
           token={token}
           name={name}
