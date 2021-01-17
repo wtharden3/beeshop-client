@@ -61,7 +61,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     this.setState({ viewCart: !this.state.viewCart });
   };
 
-  //this is passed on to 
+  //this is passed on to
   addToCartArr = (products: CartArrayType): void => {
     //push products to the cart[] that were updated from HOME.TSX
     this.state.cart.push(products);
@@ -81,8 +81,8 @@ class Navbar extends Component<NavbarProps, NavbarState> {
 
   emptyCart = () => {
     //this needs to used as token is cleared and new login and after order is placed
-    this.setState({cart: []})
-  }
+    this.setState({ cart: [] });
+  };
 
   //this is passed on to HOMe - STEP 1
   updateTotals = (prodCost: number): void => {
@@ -117,13 +117,12 @@ class Navbar extends Component<NavbarProps, NavbarState> {
   // END MATERIAL UI
 
   componentDidMount() {
-    console.log('all the purples', purple)
-    console.log('purple.primary', purple.primary)
+    console.log('all the purples', purple);
+    console.log('purple.primary', purple.primary);
   }
 
   //when the compenent is changed
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
   render() {
     //state
@@ -160,7 +159,6 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               </li>
               <li>
                 <Button onClick={this.toggleCart}>
-              
                   <span className="icons-list">
                     <ShoppingCartOutlined />
                   </span>
@@ -178,9 +176,11 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             </ul>
           </div>
 
-          <div>
-            <h3>{name ? <p>Hello, {name}!</p> : <p>Hello, guest!</p>}</h3>
-          </div>
+          {/* <div>
+            <h3 style={{ textAlign: 'right', marginRight: '20px' }}>
+              {name ? <p>Hello, {name}!</p> : <p>Hello, guest!</p>}
+            </h3>
+          </div> */}
 
           <div>
             {viewCart ? (
@@ -193,10 +193,10 @@ class Navbar extends Component<NavbarProps, NavbarState> {
             ) : null}
           </div>
 
-          
           <Switch>
             <Route exact path="/">
               <Home
+                name={name}
                 cart={cart}
                 addToCartArr={this.addToCartArr}
                 updateTotals={this.updateTotals}
@@ -209,7 +209,17 @@ class Navbar extends Component<NavbarProps, NavbarState> {
               <Orders token={token} />
             </Route>
             <Route exact path="/dashboard">
-              {isAdmin ? (<ProductsPortal showForAdmin={showForAdmin} token={token} />):(<div><h2>Not Authorized</h2><p>If you are an admin, please log on with your credentials to gain access.</p></div>)}
+              {isAdmin ? (
+                <ProductsPortal showForAdmin={showForAdmin} token={token} />
+              ) : (
+                <div>
+                  <h2>Not Authorized</h2>
+                  <p>
+                    If you are an admin, please log on with your credentials to
+                    gain access.
+                  </p>
+                </div>
+              )}
               {/* <ProductsPortal showForAdmin={showForAdmin} token={token} /> */}
             </Route>
           </Switch>

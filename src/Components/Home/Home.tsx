@@ -9,6 +9,7 @@ type HomeProps = {
   addToCartArr: (products: CartObj) => void;
   updateTotals: (prodCount: number, prodCost: number) => void;
   cart: Array<CartObj>;
+  name: string;
   //   displayProducts: () => React.ReactNode;
   //classes: PropTypes.object.isRequired,
 };
@@ -132,10 +133,19 @@ class Home extends Component<HomeProps, Products> {
   }
 
   render() {
+    const {name} = this.props;
     return (
       <div>
-        <div style={{backgroundColor: purple.primary, height: '100vh'}}>
+        <div className='Home-header' style={{backgroundColor: purple.primary, height: '100vh'}}>
+        <div>
+            <h3>
+              <p>Welcome to</p>
+            </h3>
+          </div>
           <h1>The Bee Lounge</h1>
+          <h3>
+            {name ? <p>{name}!</p> : null}
+          </h3>
           <span>icon</span>
         </div>
         <Card>
