@@ -137,7 +137,7 @@ class Navbar extends Component<NavbarProps, NavbarState> {
     return (
       <div>
         <Router>
-          <div>
+          <div style={{ paddingTop: '20px', paddingBottom: '20px'}}>
             <ul className="noDecor flex-menu">
               <li>
                 <Link to="/">
