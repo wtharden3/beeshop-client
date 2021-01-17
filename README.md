@@ -80,3 +80,18 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## For clones
 
 if you clone the project, make sure to run `npm install` for node modules
+
+## Add-ons
+
+In order to accomodate customizing themes in Ant Design, yarn, less, and craco have been used.
+
+
+[Ant Design: Customize Theme Using TypeScript and CRA (create-react-app)](https://ant.design/docs/react/use-in-typescript)
+
+[yarn](https://yarnpkg.com/)
+
+[craco](https://github.com/gsoft-inc/craco)
+
+[less](http://lesscss.org/)
+
+
