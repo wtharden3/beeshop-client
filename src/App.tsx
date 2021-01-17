@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import 'antd/dist/antd.css';
 import './App.css';
 import Navbar from './Components/Home/Navbar';
 

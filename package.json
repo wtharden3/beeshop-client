@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "less": "lessc src/style.less src/style.css"
+    "less": "lessc src/styles/style.less src/styles/style.css"
   },
   "eslintConfig": {
     "extends": [

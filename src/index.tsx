@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
 import './index.css';
+// import 'antd/lib/style/themes/default.less';
+// import 'antd/dist/antd.less'; // Import Ant Design styles by less entry
+// import '../src/styles/style.less';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
