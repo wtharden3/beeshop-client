@@ -6,7 +6,7 @@ import Cart from './Cart';
 import Orders from '../Order/Orders';
 import ProductsPortal from '../Product/ProductsPortal';
 import { ShoppingCartOutlined, LogoutOutlined } from '@ant-design/icons';
-import { purple, yellow } from '@ant-design/colors';
+import { purple } from '@ant-design/colors';
 import { Button } from 'antd';
 
 type NavbarProps = {

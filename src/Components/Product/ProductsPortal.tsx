@@ -49,8 +49,8 @@ class ProductsPortal extends Component<
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        if (data.products.length > 0) {
+        console.log('data ===> ', data);
+        if (data.products) {
           this.setState({ productList: data.products });
           this.setState({ message: data.message });
           console.log('you should see some products! 👀 ');

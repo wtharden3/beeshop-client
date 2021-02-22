@@ -137,6 +137,8 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
       },
     };
 
+    console.log('bodyObj --> ', bodyObj)
+
     fetch(url, {
       method: 'POST',
       headers: new Headers({
@@ -185,7 +187,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             <Col span={24}>
               <Form.Item label="Product Category" name="createCategory">
                 <Select
-                  defaultValue="tops"
+                  // defaultValue="tops"
                   onChange={this.handleCategoryChange}
                 >
                   <Option value="tops">tops</Option>
@@ -206,7 +208,7 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             <Col span={24}>
               <Form.Item label="Subcategory" name="createSubCategory">
                 <Select
-                  defaultValue="tees"
+                  // defaultValue="tees"
                   onChange={this.handleProdSubcategoryChange}
                 >
                   <Option value="sweatshirts">sweatshirts</Option>
@@ -234,7 +236,9 @@ class ProductCreate extends Component<ProductCreateProps, ProductCreateState> {
             </Col>
             <Col span={24}>
               <Form.Item label="Select Product Size" name="createSize">
-                <Select defaultValue="large" onChange={this.handleSizeChange}>
+                <Select 
+                // defaultValue="large" 
+                onChange={this.handleSizeChange}>
                   <Option value="xsmall">XS</Option>
                   <Option value="small">small</Option>
                   <Option value="medium">medium</Option>

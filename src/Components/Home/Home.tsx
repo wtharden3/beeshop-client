@@ -3,7 +3,7 @@ import APIURL from '../../helpers/environment';
 import { Row, Col, Button, Card } from 'antd';
 import { purple } from '@ant-design/colors';
 
-const { Meta } = Card;
+// const { Meta } = Card;
 
 type HomeProps = {
   addToCartArr: (products: CartObj) => void;
